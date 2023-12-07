@@ -1,2 +1,2 @@
-# Aplikasi-Manajemen-Alutsista
+# Aplikasi-Manajemen-Data-Alutsista
 Proyek Perangkat Lunak
