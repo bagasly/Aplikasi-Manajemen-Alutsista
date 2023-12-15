@@ -1,0 +1,60 @@
+:root {
+  --tabel: #a2cfdd;
+  --bg: #ddf2fd;
+  --secondary: #134a6e;
+  --btn: #0093ad;
+}
+body {
+  background-color: var(--bg);
+}
+/* Style the sidebar */
+.sidebar {
+  height: 100%;
+  width: 13%;
+  position: fixed;
+  background-color: var(--secondary);
+}
+
+/* Style the main content */
+.content {
+  width: 87%;
+  margin-left: auto;
+}
+
+.content .navbar {
+  background-color: var(--secondary);
+  color: white;
+  font-size: large;
+  font-weight: 700;
+  padding: 1%;
+}
+
+.btn-group {
+  background-color: var(--btn);
+}
+
+.card-body ul li {
+  background-color: unset;
+  border: unset;
+  font-weight: 600;
+  font-size: large;
+  color: white;
+  cursor: pointer;
+}
+.card-body ul li i {
+  margin-right: 10px;
+}
+
+.card img {
+  color: white;
+}
+
+.table tr th,
+.table tr td {
+  background-color: var(--tabel);
+}
+
+.form-floating input {
+  margin-bottom: 4%;
+  background-color: #ebebeb;
+}
