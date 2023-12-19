@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,700;1,700&family=Roboto&display=swap");
 :root {
   --tabel: #a2cfdd;
   --bg: #ddf2fd;
@@ -36,12 +37,16 @@ body {
 .card-body ul li {
   background-color: unset;
   border: unset;
+}
+
+.card-body ul li button {
+  text-decoration: unset;
+  color: white;
   font-weight: 600;
   font-size: large;
-  color: white;
-  cursor: pointer;
 }
-.card-body ul li i {
+
+.card-body ul li button i {
   margin-right: 10px;
 }
 
@@ -57,4 +62,8 @@ body {
 .form-floating input {
   margin-bottom: 4%;
   background-color: #ebebeb;
+}
+
+.modal-body .col ul li {
+  margin-bottom: 5%;
 }
