@@ -28,6 +28,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       session_start();
       $_SESSION['id_user'] = $row['id_user'];
       $_SESSION['username'] = $row['username'];
+      $_SESSION['name'] = $row['name'];
+      $_SESSION['grade'] = $row['grade'];
+      $_SESSION['role'] = $row['role'];
       header("Location: ../index.html"); // Ganti dengan halaman setelah login
       exit();
     } else {
