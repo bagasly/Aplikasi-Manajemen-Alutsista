@@ -586,7 +586,10 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
                 <td>Jendral</td>
                 <td>Macan Maung AD</td>
                 <td>
-                  <button type="button" class="btn btn-sm btn-danger">
+                  <button
+                    type="button"
+                    class="btn btn-sm btn-danger text-black"
+                  >
                     Delete
                   </button>
                   <button
@@ -619,29 +622,27 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
               style="font-size: x-large; font-weight: 700"
               >Profile</a
             >
-            <div
-              class="d-flex me-3"
-              onclick="showTabContent('nav-profile', 'nav-profile-tab')"
-            >
-              <a
-                class="text-white"
-                style="
-                  cursor: pointer;
-                  text-decoration: none;
-                  margin-right: 10px;
-                "
-                >admin</a
-              >
-              <a
+            <div>
+              <a class="me-1"
                 ><i
                   class="fa-solid fa-user text-white"
                   style="cursor: pointer; font-size: large"
+                  onclick="showTabContent('nav-profile', 'nav-profile-tab')"
                 ></i
               ></a>
+              <a
+                class="text-white me-3"
+                style="cursor: pointer; text-decoration: none"
+                onclick="showTabContent('nav-profile', 'nav-profile-tab')"
+                >user</a
+              >
+              <button type="button" class="btn btn-sm btn-danger me-2">
+                Logout
+              </button>
             </div>
           </div>
         </nav>
-         <?php
+        <?php
         // Sambungkan ke database
         require_once('./php/koneksi.php');
 
@@ -652,12 +653,13 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
         $sql = "SELECT name, grade, role FROM users WHERE username = ?";
 
         // Persiapkan pernyataan SQL menggunakan prepared statement
-        $stmt = $conn->prepare($sql); $stmt->bind_param("s", $username); //Eksekusi pernyataan SQL 
+        $stmt = $conn->prepare($sql); $stmt->bind_param("s", $username);
+        //Eksekusi pernyataan SQL 
         $stmt->execute(); // Ambil hasil query 
-        $result = $stmt->get_result(); // Ambil data pengguna 
-        if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc(); $name = $row['name']; $grade =
-        $row['grade']; $role = $row['role']; } // Tutup koneksi $stmt->close();
+        $result= $stmt->get_result(); // Ambil data pengguna 
+        if ($result->num_rows > 0)
+        { $row = $result->fetch_assoc(); $name = $row['name']; $grade =$row['grade']; $role = $row['role']; } // Tutup koneksi 
+        $stmt->close();
         $conn->close(); ?>
         <div
           class="container-fluid text-center d-grid"
@@ -681,8 +683,8 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
             </div>
           </div>
           <form action="" method="post">
-            <div class="profile-info">
-              <div class="form-floating">
+            <div class="profile-info" style="padding: 2% 10% 0 10%">
+              <div class="form-floating mb-3">
                 <input
                   type="text"
                   class="form-control"
@@ -693,7 +695,7 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
                 />
                 <label for="floatingInput">Nama</label>
               </div>
-              <div class="form-floating">
+              <div class="form-floating mb-3">
                 <input
                   type="text"
                   class="form-control"
