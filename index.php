@@ -400,40 +400,40 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
             class="card-header text-white p-5"
             style="background-color: #134a6e"
           ></div>
-          <div class="container-lg bg-white">
+          <div class="container-lg bg-body">
             <div class="row" style="padding: 2%">
               <div class="col" style="margin: 1%">
-                <div class="form-floating">
+                <div class="form-floating mb-3">
                   <input
                     type="id"
-                    class="form-control"
+                    class="form-control border-3"
                     id="floatingId"
                     placeholder="Id"
                   />
                   <label for="floatingId">Id</label>
                 </div>
-                <div class="form-floating">
+                <div class="form-floating mb-3">
                   <input
                     type="text"
-                    class="form-control"
+                    class="form-control border-3"
                     id="loatingName"
                     placeholder="Name"
                   />
                   <label for="floatingName">Name</label>
                 </div>
-                <div class="form-floating">
+                <div class="form-floating mb-3">
                   <input
                     type="text"
-                    class="form-control"
+                    class="form-control border-3"
                     id="floatingBattallion"
                     placeholder="Battallion"
                   />
                   <label for="floatingBattallion">Battallion</label>
                 </div>
-                <div class="form-floating">
+                <div class="form-floating mb-3">
                   <input
                     type="text"
-                    class="form-control"
+                    class="form-control border-3"
                     id="floatingGrade"
                     placeholder="Grade"
                   />
@@ -442,7 +442,7 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
                 <div class="form-floating">
                   <input
                     type="number"
-                    class="form-control"
+                    class="form-control border-3"
                     id="floatingSerialNumber"
                     placeholder="Serial Number"
                   />
@@ -450,19 +450,19 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
                 </div>
               </div>
               <div class="col" style="margin: 1%">
-                <div class="form-floating" style="margin-bottom: 4%">
+                <div class="form-floating mb-3">
                   <textarea
-                    class="form-control"
+                    class="form-control border-3"
                     placeholder="Leave a reason here"
                     id="floatingTextarea"
-                    style="background-color: #ebebeb; height: 100px"
+                    style="height: 100px"
                   ></textarea>
                   <label for="floatingTextarea">Reason</label>
                 </div>
-                <div class="form-floating">
+                <div class="form-floating mb-3">
                   <input
                     type="date"
-                    class="form-control"
+                    class="form-control border-3"
                     id="floatingDateCollect"
                     placeholder="Date of collect"
                   />
@@ -471,7 +471,7 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
                 <div class="form-floating">
                   <input
                     type="date"
-                    class="form-control"
+                    class="form-control border-3"
                     id="floatingDateReturn"
                     placeholder="Date of return"
                   />
@@ -698,7 +698,7 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
             </div>
           </div>
         </nav>
-         <?php
+        <?php
         // Sambungkan ke database
         require_once('./php/koneksi.php');
 
@@ -709,12 +709,13 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
         $sql = "SELECT name, grade, role FROM users WHERE username = ?";
 
         // Persiapkan pernyataan SQL menggunakan prepared statement
-        $stmt = $conn->prepare($sql); $stmt->bind_param("s", $username); //Eksekusi pernyataan SQL 
+        $stmt = $conn->prepare($sql); $stmt->bind_param("s", $username);
+        //Eksekusi pernyataan SQL 
         $stmt->execute(); // Ambil hasil query 
-        $result = $stmt->get_result(); // Ambil data pengguna 
-        if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc(); $name = $row['name']; $grade =
-        $row['grade']; $role = $row['role']; } // Tutup koneksi $stmt->close();
+        $result= $stmt->get_result(); // Ambil data pengguna 
+        if ($result->num_rows > 0)
+        { $row = $result->fetch_assoc(); $name = $row['name']; $grade =$row['grade']; $role = $row['role']; } // Tutup koneksi 
+        $stmt->close();
         $conn->close(); ?>
         <div
           class="container-fluid text-center d-grid"
@@ -738,8 +739,8 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
             </div>
           </div>
           <form action="" method="post">
-            <div class="profile-info">
-              <div class="form-floating">
+            <div class="profile-info" style="padding: 2% 10% 0 10%">
+              <div class="form-floating mb-3">
                 <input
                   type="text"
                   class="form-control"
@@ -750,7 +751,7 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
                 />
                 <label for="floatingInput">Nama</label>
               </div>
-              <div class="form-floating">
+              <div class="form-floating mb-3">
                 <input
                   type="text"
                   class="form-control"
