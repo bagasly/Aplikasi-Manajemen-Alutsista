@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $_SESSION['name'] = $row['name'];
       $_SESSION['grade'] = $row['grade'];
       $_SESSION['role'] = $row['role'];
-      header("Location: ../index.html"); // Ganti dengan halaman setelah login
+      header("Location: ../index.php"); // Ganti dengan halaman setelah login
       exit();
     } else {
       echo "Kata sandi salah.";
