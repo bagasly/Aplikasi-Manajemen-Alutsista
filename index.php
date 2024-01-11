@@ -49,7 +49,7 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
                 aria-controls="nav-home"
                 aria-selected="true"
               >
-                <i class="fa-solid fa-house"></i>Homes
+                <i class="fa-solid fa-house"></i>Home
               </button>
             </li>
             <li class="list-group-item">
@@ -65,6 +65,50 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
               >
                 <i class="fa-solid fa-clipboard-list"></i>Inventory
               </button>
+<<<<<<< HEAD
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">A-Z</a></li>
+                <li><a class="dropdown-item" href="#">Stock</a></li>
+                <li>
+                  <a class="dropdown-item" href="#">Z-A</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="row row-cols-1 row-cols-md-4 g-4 mt-1">
+          <?php
+          require_once('./php/koneksi.php');
+          $sql = "SELECT * FROM news";
+          $result = $conn->query($sql);
+
+          if ($result->num_rows > 0) {
+            // Output data of each row
+            while ($row = $result->fetch_assoc()) {
+              ?>
+              <div class="col">
+                <div class="card">
+                  <img src="<?php echo $row['image']; ?>" class="card-img-top" alt="..." />
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      <?php echo $row['title']; ?>
+                    </h5>
+                    <p class="card-text">
+                      <?php echo $row['date']; ?>
+                    </p>
+                    <a href="<?php echo $row['link']; ?>" class="btn btn-primary" target="_blank">Go somewhere</a>
+                  </div>
+                </div>
+              </div>
+              <?php
+            }
+          } else {
+            echo "0 results";
+          }
+
+          $conn->close();
+          ?>
+=======
             </li>
             <li class="list-group-item">
               <button
@@ -137,6 +181,7 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
               </button>
             </li>
           </ul>
+>>>>>>> 2ee85058b4abd50c583514afe02418fc8ac49243
         </div>
       </div>
     </div>

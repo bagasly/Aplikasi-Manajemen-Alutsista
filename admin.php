@@ -48,7 +48,7 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
                 aria-controls="nav-news"
                 aria-selected="true"
               >
-                <i class="fa-solid fa-table-list"></i>New
+                <i class="fa-solid fa-table-list"></i>News
               </button>
             </li>
             <li class="list-group-item">
