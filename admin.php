@@ -748,13 +748,18 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
         $sql = "SELECT name, grade, role FROM users WHERE username = ?";
 
         // Persiapkan pernyataan SQL menggunakan prepared statement
-        $stmt = $conn->prepare($sql); $stmt->bind_param("s", $username);//Eksekusi pernyataan SQL 
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $username); //Eksekusi pernyataan SQL 
         $stmt->execute(); // Ambil hasil query
-        $result= $stmt->get_result(); // Ambil data pengguna 
-        if($result->num_rows > 0) { $row = $result->fetch_assoc(); 
-          $name =$row['name']; $grade =$row['grade']; $role = $row['role']; } // Tutup koneksi 
-           $stmt->close(); 
-           $conn->close(); 
+        $result = $stmt->get_result(); // Ambil data pengguna 
+        if ($result->num_rows > 0) {
+          $row = $result->fetch_assoc();
+          $name = $row['name'];
+          $grade = $row['grade'];
+          $role = $row['role'];
+        } // Tutup koneksi 
+        $stmt->close();
+        $conn->close();
         ?>
         <div
           class="container-fluid text-center d-grid"
