@@ -129,21 +129,37 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
           </div>
         </div>
         <div class="row row-cols-1 row-cols-md-4 g-4 mt-1">
-          <div class="col">
-            <div class="card">
-              <img src="https://www.indomiliter.com/wp-content/uploads/2023/12/3728560917-1-300x167.jpg"
-                class="card-img-top" alt="..." />
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
-                  This is a longer card with supporting text below as a
-                  natural lead-in to additional content. This content is a
-                  little bit longer.
-                </p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+          <?php
+          require_once('./php/koneksi.php');
+          $sql = "SELECT * FROM news";
+          $result = $conn->query($sql);
+
+          if ($result->num_rows > 0) {
+            // Output data of each row
+            while ($row = $result->fetch_assoc()) {
+              ?>
+              <div class="col">
+                <div class="card">
+                  <img src="<?php echo $row['image']; ?>" class="card-img-top" alt="..." />
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      <?php echo $row['title']; ?>
+                    </h5>
+                    <p class="card-text">
+                      <?php echo $row['date']; ?>
+                    </p>
+                    <a href="<?php echo $row['link']; ?>" class="btn btn-primary" target="_blank">Go somewhere</a>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
+              <?php
+            }
+          } else {
+            echo "0 results";
+          }
+
+          $conn->close();
+          ?>
         </div>
       </div>
     </div>
