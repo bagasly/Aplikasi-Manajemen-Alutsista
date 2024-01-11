@@ -168,7 +168,12 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
             class="card-header text-white p-3"
             style="background-color: #134a6e"
           >
-            <button type="button" class="btn btn-primary">
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#addNews"
+            >
               <i class="fa-solid fa-plus" style="color: white"></i>
             </button>
             <div id="dropdown" class="float-end">
@@ -219,7 +224,7 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
                 <th scope="col">Image</th>
                 <th scope="col">Title</th>
                 <th scope="col">Date</th>
-                <th scope="col">Link</th>
+                <th scope="col">Source</th>
                 <th scope="col"><i class="fa-solid fa-info"></i></th>
               </tr>
             </thead>
@@ -236,7 +241,7 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
                     type="button"
                     class="btn btn-sm btn-warning"
                     data-bs-toggle="modal"
-                    data-bs-target="#edit"
+                    data-bs-target="#editNews"
                   >
                     Edit
                   </button>
@@ -289,7 +294,12 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
             class="card-header text-white p-3"
             style="background-color: #134a6e"
           >
-            <button type="button" class="btn btn-primary">
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#addInventory"
+            >
               <i class="fa-solid fa-plus" style="color: white"></i>
             </button>
             <div id="dropdown" class="float-end">
@@ -355,9 +365,15 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
                 <td>
                   <button
                     type="button"
+                    class="btn btn-sm btn-danger text-black"
+                  >
+                    Delete
+                  </button>
+                  <button
+                    type="button"
                     class="btn btn-sm btn-warning"
                     data-bs-toggle="modal"
-                    data-bs-target="#edit"
+                    data-bs-target="#editInventory"
                   >
                     Edit
                   </button>
@@ -407,9 +423,46 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
         </nav>
         <div class="card border-0 bg-transparent" style="padding: 3%">
           <div
-            class="card-header text-white p-5"
+            class="card-header text-white p-3"
             style="background-color: #134a6e"
-          ></div>
+          >
+            <div id="dropdown" class="float-end">
+              <div class="btn-group">
+                <button
+                  type="button"
+                  class="btn text-white dropdown-toggle"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  All Status
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Read</a></li>
+                  <li><a class="dropdown-item" href="#">Unready</a></li>
+                  <li>
+                    <a class="dropdown-item" href="#">Banned</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="btn-group">
+                <button
+                  type="button"
+                  class="btn text-white dropdown-toggle"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  More Filter
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">A-Z</a></li>
+                  <li><a class="dropdown-item" href="#">Stock</a></li>
+                  <li>
+                    <a class="dropdown-item" href="#">Z-A</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
           <div class="container-lg bg-white">
             <div class="list-group" style="padding: 2%">
               <a
@@ -464,9 +517,46 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
         </nav>
         <div class="card border-0 bg-transparent" style="padding: 3%">
           <div
-            class="card-header text-white p-5"
+            class="card-header text-white p-3"
             style="background-color: #134a6e"
-          ></div>
+          >
+            <div id="dropdown" class="float-end">
+              <div class="btn-group">
+                <button
+                  type="button"
+                  class="btn text-white dropdown-toggle"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  All Status
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Read</a></li>
+                  <li><a class="dropdown-item" href="#">Unready</a></li>
+                  <li>
+                    <a class="dropdown-item" href="#">Banned</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="btn-group">
+                <button
+                  type="button"
+                  class="btn text-white dropdown-toggle"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  More Filter
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">A-Z</a></li>
+                  <li><a class="dropdown-item" href="#">Stock</a></li>
+                  <li>
+                    <a class="dropdown-item" href="#">Z-A</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
           <div class="container-lg bg-white">
             <div class="list-group" style="padding: 2%">
               <a
@@ -524,7 +614,12 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
             class="card-header text-white p-3"
             style="background-color: #134a6e"
           >
-            <button type="button" class="btn btn-primary">
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#addAccount"
+            >
               <i class="fa-solid fa-plus" style="color: white"></i>
             </button>
             <div id="dropdown" class="float-end">
@@ -653,14 +748,14 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
         $sql = "SELECT name, grade, role FROM users WHERE username = ?";
 
         // Persiapkan pernyataan SQL menggunakan prepared statement
-        $stmt = $conn->prepare($sql); $stmt->bind_param("s", $username);
-        //Eksekusi pernyataan SQL 
-        $stmt->execute(); // Ambil hasil query 
+        $stmt = $conn->prepare($sql); $stmt->bind_param("s", $username);//Eksekusi pernyataan SQL 
+        $stmt->execute(); // Ambil hasil query
         $result= $stmt->get_result(); // Ambil data pengguna 
-        if ($result->num_rows > 0)
-        { $row = $result->fetch_assoc(); $name = $row['name']; $grade =$row['grade']; $role = $row['role']; } // Tutup koneksi 
-        $stmt->close();
-        $conn->close(); ?>
+        if($result->num_rows > 0) { $row = $result->fetch_assoc(); 
+          $name =$row['name']; $grade =$row['grade']; $role = $row['role']; } // Tutup koneksi 
+           $stmt->close(); 
+           $conn->close(); 
+        ?>
         <div
           class="container-fluid text-center d-grid"
           style="
@@ -723,7 +818,81 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
       </div>
 
       <!-- Modal -->
+
       <!-- Account -->
+      <!-- Add Account -->
+      <div
+        class="modal fade"
+        id="addAccount"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="addAccount"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div
+              class="modal-header"
+              style="background-color: var(--btn); color: white"
+            >
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">Add</h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="form-floating mb-3">
+                <input
+                  type="id"
+                  class="form-control border-3"
+                  id="floatingId"
+                  placeholder="Id"
+                />
+                <label for="floatingId">Id</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  class="form-control border-3"
+                  id="floatingName"
+                  placeholder="Name"
+                  value=""
+                />
+                <label for="floatingName">Name</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  class="form-control border-3"
+                  id="floatingGrade"
+                  placeholder="Grade"
+                  value=""
+                />
+                <label for="floatingGrade">Grade</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  class="form-control border-3"
+                  id="floatingBattallion"
+                  placeholder="Battalion"
+                  value=""
+                />
+                <label for="floatingBattallion">Battalion</label>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary">ADD</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Edit -->
       <div
         class="modal fade"
         id="editAccount"
@@ -747,9 +916,217 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
                 aria-label="Close"
               ></button>
             </div>
+            <div class="modal-body">
+              <div class="form-floating mb-3">
+                <input
+                  type="id"
+                  class="form-control border-3"
+                  id="floatingId"
+                  placeholder="Id"
+                  value=""
+                />
+                <label for="floatingId">Id</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  class="form-control border-3"
+                  id="floatingName"
+                  placeholder="Name"
+                  value=""
+                />
+                <label for="floatingName">Name</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  class="form-control border-3"
+                  id="floatingGrade"
+                  placeholder="Grade"
+                  value=""
+                />
+                <label for="floatingGrade">Grade</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  class="form-control border-3"
+                  id="floatingBattallion"
+                  placeholder="Battalion"
+                  value=""
+                />
+                <label for="floatingBattallion">Battalion</label>
+              </div>
+            </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-danger">Delete</button>
               <button type="button" class="btn btn-primary">Edit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- News -->
+      <!-- Add -->
+      <div
+        class="modal fade"
+        id="addNews"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="addNews"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div
+              class="modal-header"
+              style="background-color: var(--btn); color: white"
+            >
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">Add</h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="form-floating mb-3">
+                <input
+                  type="id"
+                  class="form-control border-3"
+                  id="floatingId"
+                  placeholder="Id"
+                  value=""
+                />
+                <label for="floatingId">Id</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  class="form-control border-3"
+                  id="floatingImage"
+                  placeholder="Image"
+                  value=""
+                />
+                <label for="floatingImage">Image</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  class="form-control border-3"
+                  id="floatingTittle"
+                  placeholder="Tittle"
+                  value=""
+                />
+                <label for="floatingTittle">Tittle</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  type="date"
+                  class="form-control border-3"
+                  id="floatingDate"
+                  placeholder="Date"
+                  value=""
+                />
+                <label for="floatingDate">Date</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  class="form-control border-3"
+                  id="floatingSource"
+                  placeholder="Source"
+                  value=""
+                />
+                <label for="floatingSource">Source</label>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary">ADD</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Edit -->
+      <div
+        class="modal fade"
+        id="editNews"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="editNews"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div
+              class="modal-header"
+              style="background-color: var(--btn); color: white"
+            >
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit</h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="form-floating mb-3">
+                <input
+                  type="id"
+                  class="form-control border-3"
+                  id="floatingId"
+                  placeholder="Id"
+                  value=""
+                />
+                <label for="floatingId">Id</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  class="form-control border-3"
+                  id="floatingImage"
+                  placeholder="Image"
+                  value=""
+                />
+                <label for="floatingImage">Image</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  class="form-control border-3"
+                  id="floatingTittle"
+                  placeholder="Tittle"
+                  value=""
+                />
+                <label for="floatingTittle">Tittle</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  type="date"
+                  class="form-control border-3"
+                  id="floatingDate"
+                  placeholder="Date"
+                  value=""
+                />
+                <label for="floatingDate">Date</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  class="form-control border-3"
+                  id="floatingSource"
+                  placeholder="Source"
+                  value=""
+                />
+                <label for="floatingSource">Source</label>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary">ADD</button>
             </div>
           </div>
         </div>
@@ -871,14 +1248,216 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
         </div>
       </div>
 
-      <!-- Edit -->
+      <!-- Inventory -->
+      <!-- Add inventory -->
       <div
         class="modal fade"
-        id="edit"
+        id="addInventory"
         data-bs-backdrop="static"
         data-bs-keyboard="false"
         tabindex="-1"
-        aria-labelledby="edit"
+        aria-labelledby="addInventory"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div
+              class="modal-header"
+              style="background-color: var(--btn); color: white"
+            >
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">Add</h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="container text-center w-100">
+                <div class="row">
+                  <div class="col w-30">
+                    <div>
+                      <label for="formFileMultiple" class="form-label"
+                        >Multiple files input example</label
+                      >
+                      <input
+                        class="form-control"
+                        type="file"
+                        id="formFileMultiple"
+                        multiple
+                      />
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-floating mb-3">
+                      <input
+                        type="id"
+                        class="form-control border-3"
+                        id="floatingSerialNumber"
+                        placeholder="Serial Number"
+                        value=""
+                      />
+                      <label for="floatingSerialNumber">Serial Number</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <input
+                        type="text"
+                        class="form-control border-3"
+                        id="floatingName"
+                        placeholder="Name"
+                        value=""
+                      />
+                      <label for="floatingName">Name</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <input
+                        type="text"
+                        class="form-control border-3"
+                        id="floatingType"
+                        placeholder="Type"
+                        value=""
+                      />
+                      <label for="floatingType">Type</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <input
+                        type="text"
+                        class="form-control border-3"
+                        id="floatingCapacity"
+                        placeholder="Capacity"
+                        value=""
+                      />
+                      <label for="floatingCapacity">Capacity</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <input
+                        type="text"
+                        class="form-control border-3"
+                        id="floatingSize"
+                        placeholder="Size"
+                        value=""
+                      />
+                      <label for="floatingSize">Size</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <input
+                        type="text"
+                        class="form-control border-3"
+                        id="floatingWeight"
+                        placeholder="Weight"
+                        value=""
+                      />
+                      <label for="floatingWeight">Weight</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <input
+                        type="text"
+                        class="form-control border-3"
+                        id="floatingFirepower"
+                        placeholder="Fire Power"
+                        value=""
+                      />
+                      <label for="floatingFirePower">Fire Power</label>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-floating mb-3">
+                      <input
+                        type="text"
+                        class="form-control border-3"
+                        id="floatingSpeed"
+                        placeholder="Speed"
+                        value=""
+                      />
+                      <label for="floatingSpeed">Speed</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <input
+                        type="text"
+                        class="form-control border-3"
+                        id="floatingMaterials"
+                        placeholder="Materials"
+                        value=""
+                      />
+                      <label for="floatingMaterials">Materials</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <input
+                        type="text"
+                        class="form-control border-3"
+                        id="floatingStatus"
+                        placeholder="Status"
+                        value=""
+                      />
+                      <label for="floatingStatus">Status</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <input
+                        type="text"
+                        class="form-control border-3"
+                        id="floatingOwner"
+                        placeholder="Owner"
+                        value=""
+                      />
+                      <label for="floatingOwner">Owner</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <input
+                        type="text"
+                        class="form-control border-3"
+                        id="floatingLocation"
+                        placeholder="Location"
+                        value=""
+                      />
+                      <label for="floatingLocation">Location</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <input
+                        type="text"
+                        class="form-control border-3"
+                        id="floatingMaintance"
+                        placeholder="Maintance"
+                        value=""
+                      />
+                      <label for="floatingMaintance">Maintance</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <input
+                        type="text"
+                        class="form-control border-3"
+                        id="floatingHistory"
+                        placeholder="History"
+                        value=""
+                      />
+                      <label for="floatingHistory">History</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="button" class="btn btn-primary">Add</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Edit Inventory -->
+      <div
+        class="modal fade"
+        id="editInventory"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="editInventory"
         aria-hidden="true"
       >
         <div class="modal-dialog modal-lg">
@@ -899,67 +1478,163 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
               <div class="container text-center w-100">
                 <div class="row">
                   <div class="col w-30">
-                    <img
-                      class="w-75 bg-body-secondary"
-                      style="margin-bottom: 5%"
-                      src="assets/ak47.png"
-                      alt=""
-                    />
-                    <img
-                      class="w-75 bg-body-secondary"
-                      src="assets/peluru.png"
-                      alt=""
-                    />
+                    <div>
+                      <img
+                        class="w-75 bg-body-secondary"
+                        style="margin-bottom: 5%"
+                        src="assets/ak47.png"
+                        alt=""
+                      />
+                      <img
+                        class="w-75 bg-body-secondary"
+                        src="assets/peluru.png"
+                        alt=""
+                      />
+                    </div>
                   </div>
                   <div class="col">
-                    <ul class="list-group">
-                      <li class="list-group-item list-group-item-secondary">
-                        Serial Number
-                      </li>
-                      <li class="list-group-item list-group-item-secondary">
-                        Name
-                      </li>
-                      <li class="list-group-item list-group-item-secondary">
-                        Type
-                      </li>
-                      <li class="list-group-item list-group-item-secondary">
-                        Capacity
-                      </li>
-                      <li class="list-group-item list-group-item-secondary">
-                        Size
-                      </li>
-                      <li class="list-group-item list-group-item-secondary">
-                        Weight
-                      </li>
-                      <li class="list-group-item list-group-item-secondary">
-                        Fire Power
-                      </li>
-                    </ul>
+                    <div class="form-floating mb-3">
+                      <input
+                        type="id"
+                        class="form-control border-3"
+                        id="floatingSerialNumber"
+                        placeholder="Serial Number"
+                        value=""
+                      />
+                      <label for="floatingSerialNumber">Serial Number</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <input
+                        type="text"
+                        class="form-control border-3"
+                        id="loatingName"
+                        placeholder="Name"
+                        value=""
+                      />
+                      <label for="floatingName">Name</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <input
+                        type="text"
+                        class="form-control border-3"
+                        id="floatingType"
+                        placeholder="Type"
+                        value=""
+                      />
+                      <label for="floatingType">Type</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <input
+                        type="text"
+                        class="form-control border-3"
+                        id="floatingCapacity"
+                        placeholder="Capacity"
+                        value=""
+                      />
+                      <label for="floatingCapacity">Capacity</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <input
+                        type="text"
+                        class="form-control border-3"
+                        id="floatingSize"
+                        placeholder="Size"
+                        value=""
+                      />
+                      <label for="floatingSize">Size</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <input
+                        type="text"
+                        class="form-control border-3"
+                        id="floatingWeight"
+                        placeholder="Weight"
+                        value=""
+                      />
+                      <label for="floatingWeight">Weight</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <input
+                        type="text"
+                        class="form-control border-3"
+                        id="floatingFirepower"
+                        placeholder="Fire Power"
+                        value=""
+                      />
+                      <label for="floatingFirePower">Fire Power</label>
+                    </div>
                   </div>
                   <div class="col">
-                    <ul class="list-group">
-                      <li class="list-group-item list-group-item-secondary">
-                        Speed
-                      </li>
-                      <li class="list-group-item list-group-item-secondary">
-                        Materials
-                      </li>
-                      <li class="list-group-item list-group-item-secondary">
-                        Status
-                      </li>
-                      <li class="list-group-item list-group-item-secondary">
-                        Owner
-                      </li>
-                      <li class="list-group-item list-group-item-secondary">
-                        Location
-                      </li>
-                      <li class="list-group-item list-group-item-secondary">
-                        Maintance
-                      </li>
-                      <li class="list-group-item list-group-item-secondary">
-                        History
-                      </li>
-                    </ul>
+                    <div class="form-floating mb-3">
+                      <input
+                        type="text"
+                        class="form-control border-3"
+                        id="floatingSpeed"
+                        placeholder="Speed"
+                        value=""
+                      />
+                      <label for="floatingSpeed">Speed</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <input
+                        type="text"
+                        class="form-control border-3"
+                        id="floatingMaterials"
+                        placeholder="Materials"
+                        value=""
+                      />
+                      <label for="floatingMaterials">Materials</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <input
+                        type="text"
+                        class="form-control border-3"
+                        id="floatingStatus"
+                        placeholder="Status"
+                        value=""
+                      />
+                      <label for="floatingStatus">Status</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <input
+                        type="text"
+                        class="form-control border-3"
+                        id="floatingOwner"
+                        placeholder="Owner"
+                        value=""
+                      />
+                      <label for="floatingOwner">Owner</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <input
+                        type="text"
+                        class="form-control border-3"
+                        id="floatingLocation"
+                        placeholder="Location"
+                        value=""
+                      />
+                      <label for="floatingLocation">Location</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <input
+                        type="text"
+                        class="form-control border-3"
+                        id="floatingMaintance"
+                        placeholder="Maintance"
+                        value=""
+                      />
+                      <label for="floatingMaintance">Maintance</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <input
+                        type="text"
+                        class="form-control border-3"
+                        id="floatingHistory"
+                        placeholder="History"
+                        value=""
+                      />
+                      <label for="floatingHistory">History</label>
+                    </div>
                   </div>
                 </div>
               </div>
