@@ -674,29 +674,43 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
               </tr>
             </thead>
             <tbody class="table-group-divider">
-              <tr>
-                <th scope="row">1</th>
-                <td>0001</td>
-                <td>Ashura</td>
-                <td>Jendral</td>
-                <td>Macan Maung AD</td>
-                <td>
-                  <button
-                    type="button"
-                    class="btn btn-sm btn-danger text-black"
-                  >
-                    Delete
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-sm btn-warning"
-                    data-bs-toggle="modal"
-                    data-bs-target="#editAccount"
-                  >
-                    Edit
-                  </button>
-                </td>
-              </tr>
+              <?php
+              require_once('./php/koneksi.php');
+              $sql = "SELECT id_user, name, grade, battalion FROM users";
+              $result = $conn->query($sql);
+
+              if ($result) {
+                while ($row = $result->fetch_assoc()) {
+                  ?>
+                  <tr>
+                    <th scope="row"></th>
+                    <td><?php echo $row['id_user']; ?></td>
+                    <td><?php echo $row['name']; ?></td>
+                    <td><?php echo $row['grade']; ?></td>
+                    <td><?php echo $row['battalion']; ?></td>
+                    <td>
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-danger text-black"
+                    >
+                      Delete
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-warning"
+                      data-bs-toggle="modal"
+                      data-bs-target="#editAccount"
+                    >
+                      Edit
+                    </button>
+                    </td>
+                  </tr>
+                <?php
+                }
+              } else {
+                echo "Error: " . $conn->error;
+              }
+              ?>
             </tbody>
           </table>
         </div>
@@ -823,10 +837,9 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
       </div>
 
       <!-- Modal -->
-
       <!-- Account -->
       <!-- Add Account -->
-      <div
+      <form
         class="modal fade"
         id="addAccount"
         data-bs-backdrop="static"
@@ -834,6 +847,8 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
         tabindex="-1"
         aria-labelledby="addAccount"
         aria-hidden="true"
+        action="./php/process_addAccount.php"
+        method="post"
       >
         <div class="modal-dialog">
           <div class="modal-content">
@@ -852,12 +867,13 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
             <div class="modal-body">
               <div class="form-floating mb-3">
                 <input
-                  type="id"
+                  type="username"
                   class="form-control border-3"
-                  id="floatingId"
-                  placeholder="Id"
+                  id="floatingUsername"
+                  placeholder="Username"
+                  name="username"
                 />
-                <label for="floatingId">Id</label>
+                <label for="floatingId">Username</label>
               </div>
               <div class="form-floating mb-3">
                 <input
@@ -865,9 +881,9 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
                   class="form-control border-3"
                   id="floatingName"
                   placeholder="Name"
-                  value=""
+                  name="name"
                 />
-                <label for="floatingName">Name</label>
+                <label for="floatingName">Nama</label>
               </div>
               <div class="form-floating mb-3">
                 <input
@@ -875,7 +891,7 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
                   class="form-control border-3"
                   id="floatingGrade"
                   placeholder="Grade"
-                  value=""
+                  name="grade"
                 />
                 <label for="floatingGrade">Grade</label>
               </div>
@@ -885,17 +901,37 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
                   class="form-control border-3"
                   id="floatingBattallion"
                   placeholder="Battalion"
-                  value=""
+                  name="battalion"
                 />
                 <label for="floatingBattallion">Battalion</label>
               </div>
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  class="form-control border-3"
+                  id="floatingRole"
+                  placeholder="role"
+                  name="role"
+                />
+                <label for="floatingBattallion">Role</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  class="form-control border-3"
+                  id="floatingPassword"
+                  placeholder="Password"
+                  name="password"
+                />
+                <label for="floatingBattallion">Password</label>
+              </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary">ADD</button>
+              <button type="submit" class="btn btn-primary">ADD</button>
             </div>
           </div>
         </div>
-      </div>
+      </form>
 
       <!-- Edit -->
       <div
