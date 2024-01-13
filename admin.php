@@ -682,30 +682,26 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
               if ($result) {
                 while ($row = $result->fetch_assoc()) {
                   ?>
-                  <tr>
-                    <th scope="row"></th>
-                    <td><?php echo $row['id_user']; ?></td>
-                    <td><?php echo $row['name']; ?></td>
-                    <td><?php echo $row['grade']; ?></td>
-                    <td><?php echo $row['battalion']; ?></td>
-                    <td>
-                    <button
-                      type="button"
-                      class="btn btn-sm btn-danger text-black"
-                    >
-                      Delete
-                    </button>
-                    <button
-                      type="button"
-                      class="btn btn-sm btn-warning"
-                      data-bs-toggle="modal"
-                      data-bs-target="#editAccount"
-                    >
-                      Edit
-                    </button>
-                    </td>
-                  </tr>
-                <?php
+                      <tr>
+                        <th scope="row"></th>
+                        <td><?php echo $row['id_user']; ?></td>
+                        <td><?php echo $row['name']; ?></td>
+                        <td><?php echo $row['grade']; ?></td>
+                        <td><?php echo $row['battalion']; ?></td>
+                        <td>
+                        <button
+                          type="button"
+                          class="btn btn-sm btn-danger text-black"
+                          onclick="deleteAccount(<?php echo $row['id_user']; ?>)">
+                          Delete
+                        </button>
+                        <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editAccount"
+                          onclick="editAccount(<?php echo $row['id_user']; ?>)">
+                          Edit
+                        </button>
+                        </td>
+                      </tr>
+                    <?php
                 }
               } else {
                 echo "Error: " . $conn->error;
@@ -1696,5 +1692,17 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/global.js"></script>
+    <script>
+    function deleteAccount(userId) {
+        // Lakukan sesuatu dengan userId, misalnya, panggil fungsi untuk menghapus data
+        window.location.href = './php/process_deleteAccount.php?id=' + userId;
+    }
+
+    function editAccount(userId) {
+        // Lakukan sesuatu dengan userId, misalnya, isi formulir edit dengan data pengguna yang sesuai
+        window.location.href = './php/process_editAccount.php?id=' + userId;
+    }
+</script>
+
   </body>
 </html>

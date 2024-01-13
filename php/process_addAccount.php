@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   // Eksekusi pernyataan SQL
   if ($stmt->execute()) {
-    header("Location: admin.php");
+    header("Location: ../admin.php");
     exit();
   } else {
     echo "Error: " . $sql . "<br>" . $stmt->error;
@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $conn->close();
 } else {
   // Jika bukan metode POST, redirect atau berikan pesan kesalahan
-  header("Location:./admin.php");
+  header("Location:../admin.php");
   exit();
 }
 ?>
