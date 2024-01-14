@@ -562,12 +562,12 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
             </div>
             <div class="form-floating mb-3">
               <input type="text" class="form-control border-3" id="floatingRole" placeholder="role" name="role" />
-              <label for="floatingBattallion">Role</label>
+              <label for="floatingRole">Role</label>
             </div>
             <div class="form-floating mb-3">
               <input type="text" class="form-control border-3" id="floatingPassword" placeholder="Password"
                 name="password" />
-              <label for="floatingBattallion">Password</label>
+              <label for="floatingPassword">Password</label>
             </div>
           </div>
           <div class="modal-footer">
@@ -580,7 +580,6 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
     <!-- Edit -->
     <div class="modal fade" id="editAccount" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
       aria-labelledby="editAccountLabel" aria-hidden="true">
-      <!-- ... -->
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header" style="background-color: var(--btn); color: white">
