@@ -136,19 +136,43 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
             </tr>
           </thead>
           <tbody class="table-group-divider">
-            <tr>
-              <th scope="row">1</th>
-              <td>0001</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td>
-                <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editNews">
-                  Edit
-                </button>
-              </td>
-            </tr>
+            <?php
+            require_once('./php/koneksi.php');
+            $sql = "SELECT id_news, image, title, date, link FROM news";
+            $result = $conn->query($sql);
+
+            if ($result) {
+              while ($row = $result->fetch_assoc()) {
+                ?>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>
+                    <?php echo $row['id_news']; ?>
+                  </td>
+                  <td>
+                    <?php echo $row['image']; ?>
+                  </td>
+                  <td>
+                    <?php echo $row['title']; ?>
+                  </td>
+                  <td>
+                    <?php echo $row['date']; ?>
+                  </td>
+                  <td>
+                    <?php echo $row['link']; ?>
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editNews">
+                      Edit
+                    </button>
+                  </td>
+                </tr>
+                <?php
+              }
+            } else {
+              echo "Error: " . $conn->error;
+            }
+            ?>
           </tbody>
         </table>
       </div>
@@ -638,8 +662,8 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
     </div>
     <!-- News -->
     <!-- Add -->
-    <div class="modal fade" id="addNews" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-      aria-labelledby="addNews" aria-hidden="true">
+    <form class="modal fade" id="addNews" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="addNews" aria-hidden="true" method="post" action="./php/process_addNews.php">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header" style="background-color: var(--btn); color: white">
@@ -648,32 +672,38 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
           </div>
           <div class="modal-body">
             <div class="form-floating mb-3">
-              <input type="id" class="form-control border-3" id="floatingId" placeholder="Id" value="" />
+              <input type="text" class="form-control border-3" id="floatingId" name="id_news" placeholder="Id"
+                value="" />
               <label for="floatingId">Id</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="text" class="form-control border-3" id="floatingImage" placeholder="Image" value="" />
+              <input type="text" class="form-control border-3" id="floatingImage" name="image_link" placeholder="Image"
+                value="" />
               <label for="floatingImage">Image</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="text" class="form-control border-3" id="floatingTittle" placeholder="Tittle" value="" />
-              <label for="floatingTittle">Tittle</label>
+              <input type="text" class="form-control border-3" id="floatingTittle" name="title" placeholder="Title"
+                value="" />
+              <label for="floatingTittle">Title</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="date" class="form-control border-3" id="floatingDate" placeholder="Date" value="" />
+              <input type="date" class="form-control border-3" id="floatingDate" name="date" placeholder="Date"
+                value="" />
               <label for="floatingDate">Date</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="text" class="form-control border-3" id="floatingSource" placeholder="Source" value="" />
+              <input type="text" class="form-control border-3" id="floatingSource" name="source_link"
+                placeholder="Source" value="" />
               <label for="floatingSource">Source</label>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary">ADD</button>
+            <button type="submit" class="btn btn-primary">ADD</button>
           </div>
         </div>
       </div>
-    </div>
+    </form>
+
 
     <!-- Edit -->
     <div class="modal fade" id="editNews" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
