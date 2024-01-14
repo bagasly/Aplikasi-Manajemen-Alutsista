@@ -209,30 +209,55 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
               <th scope="col">No</th>
               <th scope="col">Serial Number</th>
               <th scope="col">Name</th>
-              <th scope="col">Total</th>
+              <th scope="col">Materials</th>
               <th scope="col">Status</th>
               <th scope="col">Location</th>
               <th scope="col"><i class="fa-solid fa-info"></i></th>
             </tr>
           </thead>
           <tbody class="table-group-divider">
-            <tr>
-              <th scope="row">1</th>
-              <td>0001</td>
-              <td>AKM</td>
-              <td>70</td>
-              <td>Available</td>
-              <td></td>
-              <td>
-                <button type="button" class="btn btn-sm btn-danger text-black">
-                  Delete
-                </button>
-                <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal"
-                  data-bs-target="#editInventory">
-                  Edit
-                </button>
-              </td>
-            </tr>
+            <?php
+            require_once('./php/koneksi.php');
+            $sql = "SELECT serial_number, name, materials, status, location FROM weapons";
+            $result = $conn->query($sql);
+
+            if ($result) {
+              while ($row = $result->fetch_assoc()) {
+                ?>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>
+                    <?php echo $row['serial_number']; ?>
+                  </td>
+                  <td>
+                    <?php echo $row['name']; ?>
+                  </td>
+                  <td>
+                    <?php echo $row['materials']; ?>
+                  </td>
+                  <td>
+                    <?php echo $row['status']; ?>
+                  </td>
+                  <td>
+                    <?php echo $row['location']; ?>
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-sm btn-danger text-black"
+                      onclick="deleteInventory(<?php echo $row['serial_number']; ?>)">
+                      Delete
+                    </button>
+                    <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal"
+                      data-bs-target="#editInventory">
+                      Edit
+                    </button>
+                  </td>
+                </tr>
+                <?php
+              }
+            } else {
+              echo "Error: " . $conn->error;
+            }
+            ?>
           </tbody>
         </table>
       </div>
@@ -964,6 +989,11 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
     function deleteAccount(userId) {
       // Lakukan sesuatu dengan userId, misalnya, panggil fungsi untuk menghapus data
       window.location.href = './php/process_deleteAccount.php?id=' + userId;
+    }
+
+    function deleteInventory(weaponId) {
+      // Lakukan sesuatu dengan userId, misalnya, panggil fungsi untuk menghapus data
+      window.location.href = './php/process_deleteInventory.php?id=' + weaponId;
     }
 
 
