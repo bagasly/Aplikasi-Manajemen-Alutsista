@@ -494,7 +494,6 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
         $role = $row['role'];
       } // Tutup koneksi 
       $stmt->close();
-      $conn->close();
       ?>
       <div class="container-fluid text-center d-grid" style="
             margin: 3%;
@@ -582,405 +581,399 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
     <div class="modal fade" id="editAccount" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
       aria-labelledby="editAccountLabel" aria-hidden="true">
       <!-- ... -->
-
-      <div>
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header" style="background-color: var(--btn); color: white">
-              <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header" style="background-color: var(--btn); color: white">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="form-floating mb-3">
+              <input type="id" class="form-control border-3" id="floatingId" placeholder="Id" value="" />
+              <label for="floatingId">Id</label>
             </div>
-            <div class="modal-body">
-              <div class="form-floating mb-3">
-                <input type="id" class="form-control border-3" id="floatingId" placeholder="Id" value="" />
-                <label for="floatingId">Id</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input type="text" class="form-control border-3" id="floatingName" placeholder="Name" value="" />
-                <label for="floatingName">Name</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input type="text" class="form-control border-3" id="floatingGrade" placeholder="Grade" value="" />
-                <label for="floatingGrade">Grade</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input type="text" class="form-control border-3" id="floatingBattallion" placeholder="Battalion"
-                  value="" />
-                <label for="floatingBattallion">Battalion</label>
-              </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control border-3" id="floatingName" placeholder="Name" value="" />
+              <label for="floatingName">Name</label>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary">Edit</button>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control border-3" id="floatingGrade" placeholder="Grade" value="" />
+              <label for="floatingGrade">Grade</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control border-3" id="floatingBattallion" placeholder="Battalion"
+                value="" />
+              <label for="floatingBattallion">Battalion</label>
             </div>
           </div>
-        </div>
-      </div>
-      <!-- News -->
-      <!-- Add -->
-      <div class="modal fade" id="addNews" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="addNews" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header" style="background-color: var(--btn); color: white">
-              <h1 class="modal-title fs-5" id="staticBackdropLabel">Add</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <div class="form-floating mb-3">
-                <input type="id" class="form-control border-3" id="floatingId" placeholder="Id" value="" />
-                <label for="floatingId">Id</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input type="text" class="form-control border-3" id="floatingImage" placeholder="Image" value="" />
-                <label for="floatingImage">Image</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input type="text" class="form-control border-3" id="floatingTittle" placeholder="Tittle" value="" />
-                <label for="floatingTittle">Tittle</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input type="date" class="form-control border-3" id="floatingDate" placeholder="Date" value="" />
-                <label for="floatingDate">Date</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input type="text" class="form-control border-3" id="floatingSource" placeholder="Source" value="" />
-                <label for="floatingSource">Source</label>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary">ADD</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Edit -->
-      <div class="modal fade" id="editNews" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="editNews" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header" style="background-color: var(--btn); color: white">
-              <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <div class="form-floating mb-3">
-                <input type="id" class="form-control border-3" id="floatingId" placeholder="Id" value="" />
-                <label for="floatingId">Id</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input type="text" class="form-control border-3" id="floatingImage" placeholder="Image" value="" />
-                <label for="floatingImage">Image</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input type="text" class="form-control border-3" id="floatingTittle" placeholder="Tittle" value="" />
-                <label for="floatingTittle">Tittle</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input type="date" class="form-control border-3" id="floatingDate" placeholder="Date" value="" />
-                <label for="floatingDate">Date</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input type="text" class="form-control border-3" id="floatingSource" placeholder="Source" value="" />
-                <label for="floatingSource">Source</label>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary">ADD</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Apply Message -->
-      <div class="modal fade" id="applyMessage" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="applyMessage" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-          <div class="modal-content">
-            <div class="modal-header" style="background-color: var(--btn); color: white">
-              <h1 class="modal-title fs-5" id="staticBackdropLabel">Message</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <p>From ...</p>
-              <p>message</p>
-              <div class="form-floating" style="margin-bottom: 5px">
-                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-                <label for="floatingTextarea">Comments</label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-                <label class="form-check-label" for="flexRadioDefault1">
-                  Decline
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked />
-                <label class="form-check-label" for="flexRadioDefault2">
-                  Accept
-                </label>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary">Send</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Report -->
-      <div class="modal fade" id="reportMessage" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="reportMessage" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-          <div class="modal-content">
-            <div class="modal-header" style="background-color: var(--btn); color: white">
-              <h1 class="modal-title fs-5" id="staticBackdropLabel">Message</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <p>From ...</p>
-              <p>message</p>
-              <div class="form-floating" style="margin-bottom: 5px">
-                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-                <label for="floatingTextarea">Comments</label>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                Close
-              </button>
-              <button type="button" class="btn btn-primary">Send</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Inventory -->
-      <!-- Add inventory -->
-      <div class="modal fade" id="addInventory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="addInventory" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            <div class="modal-header" style="background-color: var(--btn); color: white">
-              <h1 class="modal-title fs-5" id="staticBackdropLabel">Add</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <div class="container text-center w-100">
-                <div class="row">
-                  <div class="col w-30">
-                    <div>
-                      <label for="formFileMultiple" class="form-label">Multiple files input example</label>
-                      <input class="form-control" type="file" id="formFileMultiple" multiple />
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-floating mb-3">
-                      <input type="id" class="form-control border-3" id="floatingSerialNumber"
-                        placeholder="Serial Number" value="" />
-                      <label for="floatingSerialNumber">Serial Number</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                      <input type="text" class="form-control border-3" id="floatingName" placeholder="Name" value="" />
-                      <label for="floatingName">Name</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                      <input type="text" class="form-control border-3" id="floatingType" placeholder="Type" value="" />
-                      <label for="floatingType">Type</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                      <input type="text" class="form-control border-3" id="floatingCapacity" placeholder="Capacity"
-                        value="" />
-                      <label for="floatingCapacity">Capacity</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                      <input type="text" class="form-control border-3" id="floatingSize" placeholder="Size" value="" />
-                      <label for="floatingSize">Size</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                      <input type="text" class="form-control border-3" id="floatingWeight" placeholder="Weight"
-                        value="" />
-                      <label for="floatingWeight">Weight</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                      <input type="text" class="form-control border-3" id="floatingFirepower" placeholder="Fire Power"
-                        value="" />
-                      <label for="floatingFirePower">Fire Power</label>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-floating mb-3">
-                      <input type="text" class="form-control border-3" id="floatingSpeed" placeholder="Speed"
-                        value="" />
-                      <label for="floatingSpeed">Speed</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                      <input type="text" class="form-control border-3" id="floatingMaterials" placeholder="Materials"
-                        value="" />
-                      <label for="floatingMaterials">Materials</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                      <input type="text" class="form-control border-3" id="floatingStatus" placeholder="Status"
-                        value="" />
-                      <label for="floatingStatus">Status</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                      <input type="text" class="form-control border-3" id="floatingOwner" placeholder="Owner"
-                        value="" />
-                      <label for="floatingOwner">Owner</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                      <input type="text" class="form-control border-3" id="floatingLocation" placeholder="Location"
-                        value="" />
-                      <label for="floatingLocation">Location</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                      <input type="text" class="form-control border-3" id="floatingMaintance" placeholder="Maintance"
-                        value="" />
-                      <label for="floatingMaintance">Maintance</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                      <input type="text" class="form-control border-3" id="floatingHistory" placeholder="History"
-                        value="" />
-                      <label for="floatingHistory">History</label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                Close
-              </button>
-              <button type="button" class="btn btn-primary">Add</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Edit Inventory -->
-      <div class="modal fade" id="editInventory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="editInventory" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            <div class="modal-header" style="background-color: var(--btn); color: white">
-              <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <div class="container text-center w-100">
-                <div class="row">
-                  <div class="col w-30">
-                    <div>
-                      <img class="w-75 bg-body-secondary" style="margin-bottom: 5%" src="assets/ak47.png" alt="" />
-                      <img class="w-75 bg-body-secondary" src="assets/peluru.png" alt="" />
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-floating mb-3">
-                      <input type="id" class="form-control border-3" id="floatingSerialNumber"
-                        placeholder="Serial Number" value="" />
-                      <label for="floatingSerialNumber">Serial Number</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                      <input type="text" class="form-control border-3" id="loatingName" placeholder="Name" value="" />
-                      <label for="floatingName">Name</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                      <input type="text" class="form-control border-3" id="floatingType" placeholder="Type" value="" />
-                      <label for="floatingType">Type</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                      <input type="text" class="form-control border-3" id="floatingCapacity" placeholder="Capacity"
-                        value="" />
-                      <label for="floatingCapacity">Capacity</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                      <input type="text" class="form-control border-3" id="floatingSize" placeholder="Size" value="" />
-                      <label for="floatingSize">Size</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                      <input type="text" class="form-control border-3" id="floatingWeight" placeholder="Weight"
-                        value="" />
-                      <label for="floatingWeight">Weight</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                      <input type="text" class="form-control border-3" id="floatingFirepower" placeholder="Fire Power"
-                        value="" />
-                      <label for="floatingFirePower">Fire Power</label>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-floating mb-3">
-                      <input type="text" class="form-control border-3" id="floatingSpeed" placeholder="Speed"
-                        value="" />
-                      <label for="floatingSpeed">Speed</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                      <input type="text" class="form-control border-3" id="floatingMaterials" placeholder="Materials"
-                        value="" />
-                      <label for="floatingMaterials">Materials</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                      <input type="text" class="form-control border-3" id="floatingStatus" placeholder="Status"
-                        value="" />
-                      <label for="floatingStatus">Status</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                      <input type="text" class="form-control border-3" id="floatingOwner" placeholder="Owner"
-                        value="" />
-                      <label for="floatingOwner">Owner</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                      <input type="text" class="form-control border-3" id="floatingLocation" placeholder="Location"
-                        value="" />
-                      <label for="floatingLocation">Location</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                      <input type="text" class="form-control border-3" id="floatingMaintance" placeholder="Maintance"
-                        value="" />
-                      <label for="floatingMaintance">Maintance</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                      <input type="text" class="form-control border-3" id="floatingHistory" placeholder="History"
-                        value="" />
-                      <label for="floatingHistory">History</label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                Close
-              </button>
-              <button type="button" class="btn btn-primary">Send</button>
-            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary">Edit</button>
           </div>
         </div>
       </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/global.js"></script>
-    <script>
-      function deleteAccount(userId) {
-        // Lakukan sesuatu dengan userId, misalnya, panggil fungsi untuk menghapus data
-        window.location.href = './php/process_deleteAccount.php?id=' + userId;
-      }
+    <!-- News -->
+    <!-- Add -->
+    <div class="modal fade" id="addNews" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="addNews" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header" style="background-color: var(--btn); color: white">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Add</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="form-floating mb-3">
+              <input type="id" class="form-control border-3" id="floatingId" placeholder="Id" value="" />
+              <label for="floatingId">Id</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control border-3" id="floatingImage" placeholder="Image" value="" />
+              <label for="floatingImage">Image</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control border-3" id="floatingTittle" placeholder="Tittle" value="" />
+              <label for="floatingTittle">Tittle</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="date" class="form-control border-3" id="floatingDate" placeholder="Date" value="" />
+              <label for="floatingDate">Date</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control border-3" id="floatingSource" placeholder="Source" value="" />
+              <label for="floatingSource">Source</label>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary">ADD</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edit -->
+    <div class="modal fade" id="editNews" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="editNews" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header" style="background-color: var(--btn); color: white">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="form-floating mb-3">
+              <input type="id" class="form-control border-3" id="floatingId" placeholder="Id" value="" />
+              <label for="floatingId">Id</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control border-3" id="floatingImage" placeholder="Image" value="" />
+              <label for="floatingImage">Image</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control border-3" id="floatingTittle" placeholder="Tittle" value="" />
+              <label for="floatingTittle">Tittle</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="date" class="form-control border-3" id="floatingDate" placeholder="Date" value="" />
+              <label for="floatingDate">Date</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control border-3" id="floatingSource" placeholder="Source" value="" />
+              <label for="floatingSource">Source</label>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary">ADD</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Apply Message -->
+    <div class="modal fade" id="applyMessage" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="applyMessage" aria-hidden="true">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header" style="background-color: var(--btn); color: white">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Message</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>From ...</p>
+            <p>message</p>
+            <div class="form-floating" style="margin-bottom: 5px">
+              <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+              <label for="floatingTextarea">Comments</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+              <label class="form-check-label" for="flexRadioDefault1">
+                Decline
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked />
+              <label class="form-check-label" for="flexRadioDefault2">
+                Accept
+              </label>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary">Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Report -->
+    <div class="modal fade" id="reportMessage" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="reportMessage" aria-hidden="true">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header" style="background-color: var(--btn); color: white">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Message</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>From ...</p>
+            <p>message</p>
+            <div class="form-floating" style="margin-bottom: 5px">
+              <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+              <label for="floatingTextarea">Comments</label>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              Close
+            </button>
+            <button type="button" class="btn btn-primary">Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Inventory -->
+    <!-- Add inventory -->
+    <form class="modal fade" id="addInventory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="addInventory" aria-hidden="true" action="./php/process_addInventory.php" method="post">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header" style="background-color: var(--btn); color: white">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Add</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="container text-center w-100">
+              <div class="row">
+                <div class="col w-30">
+                  <div>
+                    <label for="formFileMultiple" class="form-label">Multiple files input example</label>
+                    <input class="form-control" type="file" id="formFileMultiple" multiple />
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-floating mb-3">
+                    <input type="id" class="form-control border-3" id="floatingSerialNumber" placeholder="Serial Number"
+                      value="" />
+                    <label for="floatingSerialNumber">Serial Number</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control border-3" id="floatingName" placeholder="Name" value="" />
+                    <label for="floatingName">Name</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control border-3" id="floatingType" placeholder="Type" value="" />
+                    <label for="floatingType">Type</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control border-3" id="floatingCapacity" placeholder="Capacity"
+                      value="" />
+                    <label for="floatingCapacity">Capacity</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control border-3" id="floatingSize" placeholder="Size" value="" />
+                    <label for="floatingSize">Size</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control border-3" id="floatingWeight" placeholder="Weight"
+                      value="" />
+                    <label for="floatingWeight">Weight</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control border-3" id="floatingFirepower" placeholder="Fire Power"
+                      value="" />
+                    <label for="floatingFirePower">Fire Power</label>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control border-3" id="floatingSpeed" placeholder="Speed" value="" />
+                    <label for="floatingSpeed">Speed</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control border-3" id="floatingMaterials" placeholder="Materials"
+                      value="" />
+                    <label for="floatingMaterials">Materials</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control border-3" id="floatingStatus" placeholder="Status"
+                      value="" />
+                    <label for="floatingStatus">Status</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control border-3" id="floatingOwner" placeholder="Owner" value="" />
+                    <label for="floatingOwner">Owner</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control border-3" id="floatingLocation" placeholder="Location"
+                      value="" />
+                    <label for="floatingLocation">Location</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control border-3" id="floatingMaintance" placeholder="Maintance"
+                      value="" />
+                    <label for="floatingMaintance">Maintance</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control border-3" id="floatingHistory" placeholder="History"
+                      value="" />
+                    <label for="floatingHistory">History</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              Close
+            </button>
+            <button type="button" class="btn btn-primary">Add</button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <!-- Edit Inventory -->
+    <div class="modal fade" id="editInventory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="editInventory" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header" style="background-color: var(--btn); color: white">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="container text-center w-100">
+              <div class="row">
+                <div class="col w-30">
+                  <div>
+                    <img class="w-75 bg-body-secondary" style="margin-bottom: 5%" src="assets/ak47.png" alt="" />
+                    <img class="w-75 bg-body-secondary" src="assets/peluru.png" alt="" />
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-floating mb-3">
+                    <input type="id" class="form-control border-3" id="floatingSerialNumber" placeholder="Serial Number"
+                      value="" />
+                    <label for="floatingSerialNumber">Serial Number</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control border-3" id="loatingName" placeholder="Name" value="" />
+                    <label for="floatingName">Name</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control border-3" id="floatingType" placeholder="Type" value="" />
+                    <label for="floatingType">Type</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control border-3" id="floatingCapacity" placeholder="Capacity"
+                      value="" />
+                    <label for="floatingCapacity">Capacity</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control border-3" id="floatingSize" placeholder="Size" value="" />
+                    <label for="floatingSize">Size</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control border-3" id="floatingWeight" placeholder="Weight"
+                      value="" />
+                    <label for="floatingWeight">Weight</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control border-3" id="floatingFirepower" placeholder="Fire Power"
+                      value="" />
+                    <label for="floatingFirePower">Fire Power</label>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control border-3" id="floatingSpeed" placeholder="Speed" value="" />
+                    <label for="floatingSpeed">Speed</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control border-3" id="floatingMaterials" placeholder="Materials"
+                      value="" />
+                    <label for="floatingMaterials">Materials</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control border-3" id="floatingStatus" placeholder="Status"
+                      value="" />
+                    <label for="floatingStatus">Status</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control border-3" id="floatingOwner" placeholder="Owner" value="" />
+                    <label for="floatingOwner">Owner</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control border-3" id="floatingLocation" placeholder="Location"
+                      value="" />
+                    <label for="floatingLocation">Location</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control border-3" id="floatingMaintance" placeholder="Maintance"
+                      value="" />
+                    <label for="floatingMaintance">Maintance</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control border-3" id="floatingHistory" placeholder="History"
+                      value="" />
+                    <label for="floatingHistory">History</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              Close
+            </button>
+            <button type="button" class="btn btn-primary">Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/global.js"></script>
+  <script>
+    function deleteAccount(userId) {
+      // Lakukan sesuatu dengan userId, misalnya, panggil fungsi untuk menghapus data
+      window.location.href = './php/process_deleteAccount.php?id=' + userId;
+    }
 
 
-      function editAccount(id_user, name, grade, battalion) {
-        console.log("userId:", id_user);
-        console.log("name:", name);
-        console.log("grade:", grade);
-        console.log("battalion:", battalion);
+    function editAccount(id_user, name, grade, battalion) {
+      console.log("userId:", id_user);
+      console.log("name:", name);
+      console.log("grade:", grade);
+      console.log("battalion:", battalion);
 
-        document.getElementById('floatingId').value = id_user;
-        document.getElementById('floatingName').value = name;
-        document.getElementById('floatingGrade').value = grade;
-        document.getElementById('floatingBattallion').value = battalion;
-      }
-    </script>
+      document.getElementById('floatingId').value = id_user;
+      document.getElementById('floatingName').value = name;
+      document.getElementById('floatingGrade').value = grade;
+      document.getElementById('floatingBattallion').value = battalion;
+    }
+  </script>
 
 </body>
 
