@@ -162,7 +162,8 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
                     <?php echo $row['link']; ?>
                   </td>
                   <td>
-                    <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editNews">
+                    <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editNews"
+                      onclick="editNews(<?php echo $row['id_news']; ?>)">
                       Edit
                     </button>
                     <button type="button" class="btn btn-sm btn-danger text-black"
@@ -738,8 +739,8 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
 
 
     <!-- Edit -->
-    <div class="modal fade" id="editNews" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-      aria-labelledby="editNews" aria-hidden="true">
+    <form action="./php/process_editNews.php" method="post" class="modal fade" id="editNews" data-bs-backdrop="static"
+      data-bs-keyboard="false" tabindex="-1" aria-labelledby="editNews" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header" style="background-color: var(--btn); color: white">
@@ -748,32 +749,36 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
           </div>
           <div class="modal-body">
             <div class="form-floating mb-3">
-              <input type="id" class="form-control border-3" id="floatingId" placeholder="Id" value="" />
+              <input name="id_news" type="id" class="form-control border-3" id="floatingId" placeholder="Id" value="" />
               <label for="floatingId">Id</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="text" class="form-control border-3" id="floatingImage" placeholder="Image" value="" />
+              <input name="image_link" type="text" class="form-control border-3" id="floatingImage" placeholder="Image"
+                value="" />
               <label for="floatingImage">Image</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="text" class="form-control border-3" id="floatingTittle" placeholder="Tittle" value="" />
+              <input name="title" type="text" class="form-control border-3" id="floatingTittle" placeholder="Tittle"
+                value="" />
               <label for="floatingTittle">Tittle</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="date" class="form-control border-3" id="floatingDate" placeholder="Date" value="" />
+              <input name="date" type="date" class="form-control border-3" id="floatingDate" placeholder="Date"
+                value="" />
               <label for="floatingDate">Date</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="text" class="form-control border-3" id="floatingSource" placeholder="Source" value="" />
+              <input name="source_link" type="text" class="form-control border-3" id="floatingSource"
+                placeholder="Source" value="" />
               <label for="floatingSource">Source</label>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary">ADD</button>
+            <button type="submit" class="btn btn-primary">Apply</button>
           </div>
         </div>
       </div>
-    </div>
+    </form>
 
     <!-- Apply Message -->
     <form action="handle_request.php" method="post">
@@ -1078,6 +1083,11 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
     function editInventory(serial_number) {
       console.log("userId:", serial_number);
       document.getElementById('floatingSerialNumber').value = serial_number;
+    }
+
+    function editNews(newsId) {
+      console.log("userId:", newsId);
+      document.getElementById('floatingId').value = newsId;
     }
 
     function editAccount(id_user, name, grade, battalion) {
