@@ -347,36 +347,62 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
           </div>
         </div>
         <div class="container-lg p-3 pt-4">
-          <div class="card mb-4">
-            <div class="card-body">
-              <h5 class="card-title">From</h5>
-              <div class="form-floating mb-3">
-                <input type="number" class="form-control border-3" id="floatingSerialNumber" placeholder="Serial Number"
-                  value="" disabled />
-                <label for="floatingSerialNumber">Serial Number</label>
+          <?php
+          require_once('./php/koneksi.php');
+          // Query untuk mengambil semua data request dan nama user
+          $sql = "SELECT r.id_request, u.name, r.serial_number, r.reason
+              FROM request r
+              JOIN users u ON r.id_user = u.id_user";
+          $result = $conn->query($sql);
+
+          if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+              $id_request = $row['id_request'];
+              $nama = $row['name'];
+              $serial_number = $row['serial_number'];
+              $reason = $row['reason'];
+              ?>
+              <div class="card mb-4">
+                <div class="card-body">
+                  <h5 class="card-title">From
+                    <?php echo $nama; ?>
+                  </h5>
+                  <form action="handle_request.php" method="post">
+                    <input type="hidden" name="id_request" value="<?php echo $id_request; ?>">
+                    <div class="form-floating mb-3">
+                      <input type="number" class="form-control border-3" id="floatingSerialNumber" name="serial_number"
+                        placeholder="Serial Number" value="<?php echo $serial_number; ?>" disabled />
+                      <label for="floatingSerialNumber">Serial Number</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <textarea name="reason" class="form-control border-3" placeholder="Leave a reason here"
+                        id="floatingTextareaDisabled" style="height: 100px" disabled><?php echo $reason; ?></textarea>
+                      <label for="floatingTextareaDisabled">Reason</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="admin_action" id="flexRadioDefault1"
+                        value="decline" />
+                      <label class="form-check-label" for="flexRadioDefault1">
+                        Decline
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="admin_action" id="flexRadioDefault2" value="accept"
+                        checked />
+                      <label class="form-check-label" for="flexRadioDefault2">
+                        Accept
+                      </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary float-end">Send</button>
+                  </form>
+                </div>
               </div>
-              <div class="form-floating mb-3">
-                <textarea name="reason" class="form-control border-3" placeholder="Leave a reason here"
-                  id="floatingTextareaDisabled" style="height: 100px" disabled></textarea>
-                <label for="floatingTextareaDisabled">Reason</label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="admin_action" id="flexRadioDefault1"
-                  value="decline" />
-                <label class="form-check-label" for="flexRadioDefault1">
-                  Decline
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="admin_action" id="flexRadioDefault2" value="accept"
-                  checked />
-                <label class="form-check-label" for="flexRadioDefault2">
-                  Accept
-                </label>
-              </div>
-              <button type="submit" class="btn btn-primary float-end">Send</button>
-            </div>
-          </div>
+              <?php
+            }
+          } else {
+            echo "Tidak ada data request yang ditemukan.";
+          }
+          ?>
         </div>
       </div>
     </div>
@@ -676,7 +702,8 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
           </div>
           <div class="modal-body">
             <div class="form-floating mb-3">
-              <input type="id" class="form-control border-3" name="id_user" id="floatingIdaccount" placeholder="Id" value="" />
+              <input type="id" class="form-control border-3" name="id_user" id="floatingIdaccount" placeholder="Id"
+                value="" />
               <label for="floatingIdaccount">Id</label>
             </div>
             <div class="form-floating mb-3">
@@ -685,8 +712,8 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
               <label for="floatingNameaccount">Name</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="text" class="form-control border-3" name="grade" id="floatingGradeaccount" placeholder="Grade"
-                value="" />
+              <input type="text" class="form-control border-3" name="grade" id="floatingGradeaccount"
+                placeholder="Grade" value="" />
               <label for="floatingGradeaccount">Grade</label>
             </div>
             <div class="form-floating mb-3">
@@ -701,7 +728,7 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
         </div>
       </div>
     </form>
-    
+
     <!-- News -->
     <!-- Add -->
     <form class="modal fade" id="addNews" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -784,48 +811,6 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
         </div>
       </div>
     </div>
-
-    <!-- Apply Message -->
-    <form action="handle_request.php" method="post">
-      <div class="modal fade" id="applyMessage" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="applyMessage" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-          <div class="modal-content">
-            <div class="modal-header" style="background-color: var(--btn); color: white">
-              <h1 class="modal-title fs-5" id="staticBackdropLabel">Message</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <p>From ...</p>
-              <p>message</p>
-              <div class="form-floating" style="margin-bottom: 5px">
-                <textarea class="form-control" name="comment" placeholder="Leave a comment here"
-                  id="floatingTextarea"></textarea>
-                <label for="floatingTextarea">Comments</label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="admin_action" id="flexRadioDefault1"
-                  value="decline" />
-                <label class="form-check-label" for="flexRadioDefault1">
-                  Decline
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="admin_action" id="flexRadioDefault2" value="accept"
-                  checked />
-                <label class="form-check-label" for="flexRadioDefault2">
-                  Accept
-                </label>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="submit" class="btn btn-primary">Send</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </form>
-
 
     <!-- Report -->
     <div class="modal fade" id="reportMessage" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -982,13 +967,13 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
                 </div>
                 <div class="col">
                   <div class="form-floating mb-3">
-                    <input name="serial_number" type="id" class="form-control border-3" id="floatingSerialNumberinventory"
-                      placeholder="Serial Number" value="" />
+                    <input name="serial_number" type="id" class="form-control border-3"
+                      id="floatingSerialNumberinventory" placeholder="Serial Number" value="" />
                     <label for="floatingSerialNumberinventory">Serial Number</label>
                   </div>
                   <div class="form-floating mb-3">
-                    <input name="name" type="text" class="form-control border-3" id="floatingNameinventory" placeholder="Name"
-                      value="" />
+                    <input name="name" type="text" class="form-control border-3" id="floatingNameinventory"
+                      placeholder="Name" value="" />
                     <label for="floatingNameinventory">Name</label>
                   </div>
                   <div class="form-floating mb-3">
