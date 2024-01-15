@@ -1,18 +1,22 @@
 <?php
-require_once('./php/koneksi.php');
+require_once('koneksi.php');
 
-if (isset($_GET['id'])) {
-  $userId = $_GET['id'];
-  $sql = "SELECT id_user, name, grade, battalion FROM users WHERE id_user = $userId";
-  $result = $conn->query($sql);
+// Check if the form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  // Retrieve data from the form
+  $id_user = $_POST['id_user'];
+  $name = $_POST['name'];
+  $grade = $_POST['grade'];
+  $battalion = $_POST['battalion'];
 
-  if ($result) {
-    $userData = $result->fetch_assoc();
-    echo json_encode($userData);
+  $sql = "UPDATE users SET name='$name', grade='$grade', battalion='$battalion' WHERE id_user='$id_user'";
+
+  if ($conn->query($sql) === TRUE) {
+    header("Location: ../admin.php");
   } else {
-    echo "Error: " . $conn->error;
+    echo "Error updating record: " . $conn->error;
   }
-}
 
-$conn->close();
+  $conn->close();
+}
 ?>

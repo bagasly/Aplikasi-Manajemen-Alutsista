@@ -631,8 +631,8 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
     </form>
 
     <!-- Edit -->
-    <div class="modal fade" id="editAccount" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-      aria-labelledby="editAccountLabel" aria-hidden="true">
+    <form class="modal fade" id="editAccount" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="editAccountLabel" aria-hidden="true" method="post" action="./php/process_editAccount.php">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header" style="background-color: var(--btn); color: white">
@@ -641,29 +641,31 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
           </div>
           <div class="modal-body">
             <div class="form-floating mb-3">
-              <input type="id" class="form-control border-3" id="floatingId" placeholder="Id" value="" />
+              <input type="id" class="form-control border-3" name="id_user" id="floatingId" placeholder="Id" value="" />
               <label for="floatingId">Id</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="text" class="form-control border-3" id="floatingName" placeholder="Name" value="" />
+              <input type="text" class="form-control border-3" name="name" id="floatingName" placeholder="Name"
+                value="" />
               <label for="floatingName">Name</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="text" class="form-control border-3" id="floatingGrade" placeholder="Grade" value="" />
+              <input type="text" class="form-control border-3" name="grade" id="floatingGrade" placeholder="Grade"
+                value="" />
               <label for="floatingGrade">Grade</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="text" class="form-control border-3" id="floatingBattallion" placeholder="Battalion"
-                value="" />
+              <input type="text" class="form-control border-3" name="battalion" id="floatingBattallion"
+                placeholder="Battalion" value="" />
               <label for="floatingBattallion">Battalion</label>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary">Edit</button>
+            <button type="submit" class="btn btn-primary">Edit</button>
           </div>
         </div>
       </div>
-    </div>
+    </form>
     <!-- News -->
     <!-- Add -->
     <form class="modal fade" id="addNews" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
