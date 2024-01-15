@@ -275,7 +275,7 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
                       Delete
                     </button>
                     <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal"
-                      data-bs-target="#editInventory">
+                      data-bs-target="#editInventory" onclick="editInventory(<?php echo $row['serial_number']; ?>)">
                       Edit
                     </button>
                   </td>
@@ -337,10 +337,36 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
             </div>
           </div>
         </div>
-        <div class="container-lg bg-white">
-          <div class="list-group" style="padding: 2%">
-            <a href="#" class="list-group-item list-group-item-action list-group-item-secondary" data-bs-toggle="modal"
-              data-bs-target="#applyMessage" style="padding: 1%">From ......</a>
+        <div class="container-lg p-3 pt-4">
+          <div class="card mb-4">
+            <div class="card-body">
+              <h5 class="card-title">From</h5>
+              <div class="form-floating mb-3">
+                <input type="number" class="form-control border-3" id="floatingSerialNumber" placeholder="Serial Number"
+                  value="" disabled />
+                <label for="floatingSerialNumber">Serial Number</label>
+              </div>
+              <div class="form-floating mb-3">
+                <textarea name="reason" class="form-control border-3" placeholder="Leave a reason here"
+                  id="floatingTextareaDisabled" style="height: 100px" disabled></textarea>
+                <label for="floatingTextareaDisabled">Reason</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="admin_action" id="flexRadioDefault1"
+                  value="decline" />
+                <label class="form-check-label" for="flexRadioDefault1">
+                  Decline
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="admin_action" id="flexRadioDefault2" value="accept"
+                  checked />
+                <label class="form-check-label" for="flexRadioDefault2">
+                  Accept
+                </label>
+              </div>
+              <button type="submit" class="btn btn-primary float-end">Send</button>
+            </div>
           </div>
         </div>
       </div>
@@ -926,8 +952,9 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
     </form>
 
     <!-- Edit Inventory -->
-    <div class="modal fade" id="editInventory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-      aria-labelledby="editInventory" aria-hidden="true">
+    <form method="post" action="./php/process_editInventory.php" class="modal fade" id="editInventory"
+      data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editInventory"
+      aria-hidden="true" enctype="multipart/form-data">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header" style="background-color: var(--btn); color: white">
@@ -939,76 +966,81 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
               <div class="row">
                 <div class="col w-30">
                   <div>
-                    <img class="w-75 bg-body-secondary" style="margin-bottom: 5%" src="assets/ak47.png" alt="" />
-                    <img class="w-75 bg-body-secondary" src="assets/peluru.png" alt="" />
+                    <label for="formFileMultiple" class="form-label">Gambar</label>
+                    <input class="form-control" type="file" name="image" id="image" multiple />
                   </div>
                 </div>
                 <div class="col">
                   <div class="form-floating mb-3">
-                    <input type="id" class="form-control border-3" id="floatingSerialNumber" placeholder="Serial Number"
-                      value="" />
+                    <input name="serial_number" type="id" class="form-control border-3" id="floatingSerialNumber"
+                      placeholder="Serial Number" value="" />
                     <label for="floatingSerialNumber">Serial Number</label>
                   </div>
                   <div class="form-floating mb-3">
-                    <input type="text" class="form-control border-3" id="loatingName" placeholder="Name" value="" />
+                    <input name="name" type="text" class="form-control border-3" id="loatingName" placeholder="Name"
+                      value="" />
                     <label for="floatingName">Name</label>
                   </div>
                   <div class="form-floating mb-3">
-                    <input type="text" class="form-control border-3" id="floatingType" placeholder="Type" value="" />
+                    <input name="type" type="text" class="form-control border-3" id="floatingType" placeholder="Type"
+                      value="" />
                     <label for="floatingType">Type</label>
                   </div>
                   <div class="form-floating mb-3">
-                    <input type="text" class="form-control border-3" id="floatingCapacity" placeholder="Capacity"
-                      value="" />
+                    <input name="capacity" type="text" class="form-control border-3" id="floatingCapacity"
+                      placeholder="Capacity" value="" />
                     <label for="floatingCapacity">Capacity</label>
                   </div>
                   <div class="form-floating mb-3">
-                    <input type="text" class="form-control border-3" id="floatingSize" placeholder="Size" value="" />
+                    <input name="size" type="text" class="form-control border-3" id="floatingSize" placeholder="Size"
+                      value="" />
                     <label for="floatingSize">Size</label>
                   </div>
                   <div class="form-floating mb-3">
-                    <input type="text" class="form-control border-3" id="floatingWeight" placeholder="Weight"
-                      value="" />
+                    <input name="weight" type="text" class="form-control border-3" id="floatingWeight"
+                      placeholder="Weight" value="" />
                     <label for="floatingWeight">Weight</label>
                   </div>
                   <div class="form-floating mb-3">
-                    <input type="text" class="form-control border-3" id="floatingFirepower" placeholder="Fire Power"
-                      value="" />
+                    <input name="fire_power" type="text" class="form-control border-3" id="floatingFirepower"
+                      placeholder="Fire Power" value="" />
                     <label for="floatingFirePower">Fire Power</label>
                   </div>
                 </div>
                 <div class="col">
                   <div class="form-floating mb-3">
-                    <input type="text" class="form-control border-3" id="floatingSpeed" placeholder="Speed" value="" />
+                    <input name="speed" type="text" class="form-control border-3" id="floatingSpeed" placeholder="Speed"
+                      value="" />
                     <label for="floatingSpeed">Speed</label>
                   </div>
                   <div class="form-floating mb-3">
-                    <input type="text" class="form-control border-3" id="floatingMaterials" placeholder="Materials"
-                      value="" />
+                    <input name="materials" type="text" class="form-control border-3" id="floatingMaterials"
+                      placeholder="Materials" value="" />
                     <label for="floatingMaterials">Materials</label>
                   </div>
                   <div class="form-floating mb-3">
-                    <input type="text" class="form-control border-3" id="floatingStatus" placeholder="Status"
-                      value="" />
+                    <input name="status" type="text" class="form-control border-3" id="floatingStatus"
+                      placeholder="Status" value="" />
                     <label for="floatingStatus">Status</label>
                   </div>
                   <div class="form-floating mb-3">
-                    <input type="text" class="form-control border-3" id="floatingOwner" placeholder="Owner" value="" />
+                    <input name="owner" type="text" class="form-control border-3" id="floatingOwner" placeholder="Owner"
+                      value="" />
                     <label for="floatingOwner">Owner</label>
                   </div>
                   <div class="form-floating mb-3">
-                    <input type="text" class="form-control border-3" id="floatingLocation" placeholder="Location"
-                      value="" />
+                    <input name="location" type="text" class="form-control border-3" id="floatingLocation"
+                      placeholder="Location" value="" />
                     <label for="floatingLocation">Location</label>
                   </div>
                   <div class="form-floating mb-3">
-                    <input type="text" class="form-control border-3" id="floatingMaintance" placeholder="Maintance"
-                      value="" />
+                    <input name="maintance" type="text" class="form-control border-3" id="floatingMaintance"
+                      placeholder="Maintance" value="" />
                     <label for="floatingMaintance">Maintance</label>
                   </div>
                   <div class="form-floating mb-3">
-                    <input type="text" class="form-control border-3" id="floatingHistory" placeholder="History"
-                      value="" />
+                    <input name="history" type="text" class="form-control border-3" id="floatingHistory"
+                      placeholder="History" value="" />
                     <label for="floatingHistory">History</label>
                   </div>
                 </div>
@@ -1019,11 +1051,11 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
               Close
             </button>
-            <button type="button" class="btn btn-primary">Send</button>
+            <button type="submit" class="btn btn-primary">Send</button>
           </div>
         </div>
       </div>
-    </div>
+    </form>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/global.js"></script>
@@ -1043,6 +1075,10 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
       window.location.href = './php/process_deleteNews.php?id=' + newsId;
     }
 
+    function editInventory(serial_number) {
+      console.log("userId:", serial_number);
+      document.getElementById('floatingSerialNumber').value = serial_number;
+    }
 
     function editAccount(id_user, name, grade, battalion) {
       console.log("userId:", id_user);
