@@ -165,7 +165,8 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
                     <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editNews">
                       Edit
                     </button>
-                    <button type="button" class="btn btn-sm btn-danger text-black" data-bs-toggle="modal" data-bs-target="#editNews">
+                    <button type="button" class="btn btn-sm btn-danger text-black" data-bs-toggle="modal"
+                      data-bs-target="#editNews">
                       Delete
                     </button>
                   </td>
@@ -518,9 +519,9 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
                 onclick="showTabContent('nav-profile', 'nav-profile-tab')"></i></a>
             <a class="text-white me-3" style="cursor: pointer; text-decoration: none"
               onclick="showTabContent('nav-profile', 'nav-profile-tab')">user</a>
-            <button type="button" class="btn btn-sm btn-danger me-2">
-              Logout
-            </button>
+            <a href="./php/logout.php"><button type="button" class="btn btn-sm btn-danger me-2">
+                Logout
+              </button></a>
           </div>
         </div>
       </nav>
