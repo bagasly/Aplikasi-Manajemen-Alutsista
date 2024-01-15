@@ -748,40 +748,46 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
     </div>
 
     <!-- Apply Message -->
-    <div class="modal fade" id="applyMessage" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-      aria-labelledby="applyMessage" aria-hidden="true">
-      <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-          <div class="modal-header" style="background-color: var(--btn); color: white">
-            <h1 class="modal-title fs-5" id="staticBackdropLabel">Message</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <p>From ...</p>
-            <p>message</p>
-            <div class="form-floating" style="margin-bottom: 5px">
-              <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-              <label for="floatingTextarea">Comments</label>
+    <form action="handle_request.php" method="post">
+      <div class="modal fade" id="applyMessage" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="applyMessage" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header" style="background-color: var(--btn); color: white">
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">Message</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-              <label class="form-check-label" for="flexRadioDefault1">
-                Decline
-              </label>
+            <div class="modal-body">
+              <p>From ...</p>
+              <p>message</p>
+              <div class="form-floating" style="margin-bottom: 5px">
+                <textarea class="form-control" name="comment" placeholder="Leave a comment here"
+                  id="floatingTextarea"></textarea>
+                <label for="floatingTextarea">Comments</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="admin_action" id="flexRadioDefault1"
+                  value="decline" />
+                <label class="form-check-label" for="flexRadioDefault1">
+                  Decline
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="admin_action" id="flexRadioDefault2" value="accept"
+                  checked />
+                <label class="form-check-label" for="flexRadioDefault2">
+                  Accept
+                </label>
+              </div>
             </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked />
-              <label class="form-check-label" for="flexRadioDefault2">
-                Accept
-              </label>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Send</button>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary">Send</button>
           </div>
         </div>
       </div>
-    </div>
+    </form>
+
 
     <!-- Report -->
     <div class="modal fade" id="reportMessage" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"

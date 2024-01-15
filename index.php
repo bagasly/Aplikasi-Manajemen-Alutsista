@@ -289,52 +289,41 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
       </nav>
       <div class="card border-0 bg-transparent" style="padding: 3%">
         <div class="card-header text-white p-5" style="background-color: #134a6e"></div>
-        <div class="container-lg bg-body p-4">
+        <form class="container-lg bg-body p-4" method="post" action="./php/request.php">
           <div class="row">
             <div class="col" style="margin: 1%">
               <div class="form-floating mb-3">
-                <input type="id" class="form-control border-3" id="floatingId" placeholder="Id" />
+                <input name="id_user" type="id" class="form-control border-3" id="floatingId" placeholder="Id" />
                 <label for="floatingId">Id</label>
               </div>
-              <div class="form-floating mb-3">
-                <input type="text" class="form-control border-3" id="loatingName" placeholder="Name" />
-                <label for="floatingName">Name</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input type="text" class="form-control border-3" id="floatingBattallion" placeholder="Battallion" />
-                <label for="floatingBattallion">Battallion</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input type="text" class="form-control border-3" id="floatingGrade" placeholder="Grade" />
-                <label for="floatingGrade">Grade</label>
-              </div>
               <div class="form-floating">
-                <input type="number" class="form-control border-3" id="floatingSerialNumber"
+                <input name="serial_number" type="number" class="form-control border-3" id="floatingSerialNumber"
                   placeholder="Serial Number" />
                 <label for="floatingSerialNumber">Serial Number</label>
               </div>
             </div>
             <div class="col" style="margin: 1%">
               <div class="form-floating mb-3">
-                <textarea class="form-control border-3" placeholder="Leave a reason here" id="floatingTextarea"
-                  style="height: 100px"></textarea>
+                <textarea name="reason" class="form-control border-3" placeholder="Leave a reason here"
+                  id="floatingTextarea" style="height: 100px"></textarea>
                 <label for="floatingTextarea">Reason</label>
               </div>
               <div class="form-floating mb-3">
-                <input type="date" class="form-control border-3" id="floatingDateCollect"
+                <input name="tgl_pinjam" type="date" class="form-control border-3" id="floatingDateCollect"
                   placeholder="Date of collect" />
                 <label for="floatingDateCollect">Date of collect</label>
               </div>
               <div class="form-floating">
-                <input type="date" class="form-control border-3" id="floatingDateReturn" placeholder="Date of return" />
+                <input name="tgl_kembali" type="date" class="form-control border-3" id="floatingDateReturn"
+                  placeholder="Date of return" />
                 <label for="floatingDateReturn">Date of return</label>
               </div>
             </div>
           </div>
-          <button type="button" class="btn btn-primary btn-lg float-end">
+          <button type="submit" class="btn btn-primary btn-lg float-end">
             Send
           </button>
-        </div>
+        </form>
       </div>
     </div>
 
