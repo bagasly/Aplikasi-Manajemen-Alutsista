@@ -163,7 +163,11 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
                   </td>
                   <td>
                     <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editNews"
-                      onclick="editNews(<?php echo $row['id_news']; ?>)">
+                      onclick="editNews(<?php echo $row['id_news']; ?>,
+                      '<?php echo $row['image']; ?>',
+                      '<?php echo $row['title']; ?>',
+                      '<?php echo $row['date']; ?>',
+                      '<?php echo $row['link']; ?>')">
                       Edit
                     </button>
                     <button type="button" class="btn btn-sm btn-danger text-black"
@@ -276,7 +280,11 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
                       Delete
                     </button>
                     <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal"
-                      data-bs-target="#editInventory" onclick="editInventory(<?php echo $row['serial_number']; ?>)">
+                      data-bs-target="#editInventory" onclick="editInventory(<?php echo $row['serial_number']; ?>, 
+                      '<?php echo $row['name']; ?>',
+                      '<?php echo $row['materials']; ?>',
+                      '<?php echo $row['status']; ?>',
+                      '<?php echo $row['location']; ?>')">
                       Edit
                     </button>
                   </td>
@@ -668,23 +676,23 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
           </div>
           <div class="modal-body">
             <div class="form-floating mb-3">
-              <input type="id" class="form-control border-3" name="id_user" id="floatingId" placeholder="Id" value="" />
-              <label for="floatingId">Id</label>
+              <input type="id" class="form-control border-3" name="id_user" id="floatingIdaccount" placeholder="Id" value="" />
+              <label for="floatingIdaccount">Id</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="text" class="form-control border-3" name="name" id="floatingName" placeholder="Name"
+              <input type="text" class="form-control border-3" name="name" id="floatingNameaccount" placeholder="Name"
                 value="" />
-              <label for="floatingName">Name</label>
+              <label for="floatingNameaccount">Name</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="text" class="form-control border-3" name="grade" id="floatingGrade" placeholder="Grade"
+              <input type="text" class="form-control border-3" name="grade" id="floatingGradeaccount" placeholder="Grade"
                 value="" />
-              <label for="floatingGrade">Grade</label>
+              <label for="floatingGradeaccount">Grade</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="text" class="form-control border-3" name="battalion" id="floatingBattallion"
+              <input type="text" class="form-control border-3" name="battalion" id="floatingBattallionaccount"
                 placeholder="Battalion" value="" />
-              <label for="floatingBattallion">Battalion</label>
+              <label for="floatingBattallionaccount">Battalion</label>
             </div>
           </div>
           <div class="modal-footer">
@@ -693,6 +701,7 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
         </div>
       </div>
     </form>
+    
     <!-- News -->
     <!-- Add -->
     <form class="modal fade" id="addNews" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -739,8 +748,8 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
 
 
     <!-- Edit -->
-    <form action="./php/process_editNews.php" method="post" class="modal fade" id="editNews" data-bs-backdrop="static"
-      data-bs-keyboard="false" tabindex="-1" aria-labelledby="editNews" aria-hidden="true">
+    <div class="modal fade" id="editNews" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="editNews" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header" style="background-color: var(--btn); color: white">
@@ -749,36 +758,32 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
           </div>
           <div class="modal-body">
             <div class="form-floating mb-3">
-              <input name="id_news" type="id" class="form-control border-3" id="floatingId" placeholder="Id" value="" />
-              <label for="floatingId">Id</label>
+              <input type="id" class="form-control border-3" id="floatingIdnews" placeholder="Id" value="" />
+              <label for="floatingIdnews">Id</label>
             </div>
             <div class="form-floating mb-3">
-              <input name="image_link" type="text" class="form-control border-3" id="floatingImage" placeholder="Image"
-                value="" />
-              <label for="floatingImage">Image</label>
+              <input type="text" class="form-control border-3" id="floatingImagenews" placeholder="Image" value="" />
+              <label for="floatingImagenews">Image</label>
             </div>
             <div class="form-floating mb-3">
-              <input name="title" type="text" class="form-control border-3" id="floatingTittle" placeholder="Tittle"
-                value="" />
-              <label for="floatingTittle">Tittle</label>
+              <input type="text" class="form-control border-3" id="floatingTittlenews" placeholder="Tittle" value="" />
+              <label for="floatingTittlenews">Tittle</label>
             </div>
             <div class="form-floating mb-3">
-              <input name="date" type="date" class="form-control border-3" id="floatingDate" placeholder="Date"
-                value="" />
-              <label for="floatingDate">Date</label>
+              <input type="date" class="form-control border-3" id="floatingDatenews" placeholder="Date" value="" />
+              <label for="floatingDatenews">Date</label>
             </div>
             <div class="form-floating mb-3">
-              <input name="source_link" type="text" class="form-control border-3" id="floatingSource"
-                placeholder="Source" value="" />
-              <label for="floatingSource">Source</label>
+              <input type="text" class="form-control border-3" id="floatingSourcenews" placeholder="Source" value="" />
+              <label for="floatingSourcenews">Source</label>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-primary">Apply</button>
+            <button type="button" class="btn btn-primary">ADD</button>
           </div>
         </div>
       </div>
-    </form>
+    </div>
 
     <!-- Apply Message -->
     <form action="handle_request.php" method="post">
@@ -977,14 +982,14 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
                 </div>
                 <div class="col">
                   <div class="form-floating mb-3">
-                    <input name="serial_number" type="id" class="form-control border-3" id="floatingSerialNumber"
+                    <input name="serial_number" type="id" class="form-control border-3" id="floatingSerialNumberinventory"
                       placeholder="Serial Number" value="" />
-                    <label for="floatingSerialNumber">Serial Number</label>
+                    <label for="floatingSerialNumberinventory">Serial Number</label>
                   </div>
                   <div class="form-floating mb-3">
-                    <input name="name" type="text" class="form-control border-3" id="loatingName" placeholder="Name"
+                    <input name="name" type="text" class="form-control border-3" id="floatingNameinventory" placeholder="Name"
                       value="" />
-                    <label for="floatingName">Name</label>
+                    <label for="floatingNameinventory">Name</label>
                   </div>
                   <div class="form-floating mb-3">
                     <input name="type" type="text" class="form-control border-3" id="floatingType" placeholder="Type"
@@ -1019,14 +1024,14 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
                     <label for="floatingSpeed">Speed</label>
                   </div>
                   <div class="form-floating mb-3">
-                    <input name="materials" type="text" class="form-control border-3" id="floatingMaterials"
+                    <input name="materials" type="text" class="form-control border-3" id="floatingMaterialsinventory"
                       placeholder="Materials" value="" />
-                    <label for="floatingMaterials">Materials</label>
+                    <label for="floatingMaterialsinventory">Materials</label>
                   </div>
                   <div class="form-floating mb-3">
-                    <input name="status" type="text" class="form-control border-3" id="floatingStatus"
+                    <input name="status" type="text" class="form-control border-3" id="floatingStatusinventory"
                       placeholder="Status" value="" />
-                    <label for="floatingStatus">Status</label>
+                    <label for="floatingStatusinventory">Status</label>
                   </div>
                   <div class="form-floating mb-3">
                     <input name="owner" type="text" class="form-control border-3" id="floatingOwner" placeholder="Owner"
@@ -1034,9 +1039,9 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
                     <label for="floatingOwner">Owner</label>
                   </div>
                   <div class="form-floating mb-3">
-                    <input name="location" type="text" class="form-control border-3" id="floatingLocation"
+                    <input name="location" type="text" class="form-control border-3" id="floatingLocationinventory"
                       placeholder="Location" value="" />
-                    <label for="floatingLocation">Location</label>
+                    <label for="floatingLocationinventory">Location</label>
                   </div>
                   <div class="form-floating mb-3">
                     <input name="maintance" type="text" class="form-control border-3" id="floatingMaintance"
@@ -1080,26 +1085,27 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
       window.location.href = './php/process_deleteNews.php?id=' + newsId;
     }
 
-    function editInventory(serial_number) {
-      console.log("userId:", serial_number);
-      document.getElementById('floatingSerialNumber').value = serial_number;
-    }
-
-    function editNews(newsId) {
-      console.log("userId:", newsId);
-      document.getElementById('floatingId').value = newsId;
+    function editInventory(serial_number, name, status, location, materials) {
+      document.getElementById('floatingSerialNumberinventory').value = serial_number;
+      document.getElementById('floatingNameinventory').value = name;
+      document.getElementById('floatingMaterialsinventory').value = materials;
+      document.getElementById('floatingStatusinventory').value = status;
+      document.getElementById('floatingLocationinventory').value = location;
     }
 
     function editAccount(id_user, name, grade, battalion) {
-      console.log("userId:", id_user);
-      console.log("name:", name);
-      console.log("grade:", grade);
-      console.log("battalion:", battalion);
+      document.getElementById('floatingIdaccount').value = id_user;
+      document.getElementById('floatingNameaccount').value = name;
+      document.getElementById('floatingGradeaccount').value = grade;
+      document.getElementById('floatingBattallionaccount').value = battalion;
+    }
 
-      document.getElementById('floatingId').value = id_user;
-      document.getElementById('floatingName').value = name;
-      document.getElementById('floatingGrade').value = grade;
-      document.getElementById('floatingBattallion').value = battalion;
+    function editNews(id_news, image, title, date, link) {
+      document.getElementById('floatingIdnews').value = id_news;
+      document.getElementById('floatingImagenews').value = image;
+      document.getElementById('floatingTittlenews').value = title;
+      document.getElementById('floatingDatenews').value = date;
+      document.getElementById('floatingSourcenews').value = link;
     }
   </script>
 
