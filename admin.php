@@ -165,8 +165,8 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
                     <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editNews">
                       Edit
                     </button>
-                    <button type="button" class="btn btn-sm btn-danger text-black" data-bs-toggle="modal"
-                      data-bs-target="#editNews">
+                    <button type="button" class="btn btn-sm btn-danger text-black"
+                      onclick="deleteNews(<?php echo $row['id_news']; ?>)">
                       Delete
                     </button>
                   </td>
@@ -1036,6 +1036,11 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
     function deleteInventory(weaponId) {
       // Lakukan sesuatu dengan userId, misalnya, panggil fungsi untuk menghapus data
       window.location.href = './php/process_deleteInventory.php?id=' + weaponId;
+    }
+
+    function deleteNews(newsId) {
+      // Lakukan sesuatu dengan userId, misalnya, panggil fungsi untuk menghapus data
+      window.location.href = './php/process_deleteNews.php?id=' + newsId;
     }
 
 
