@@ -165,6 +165,9 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
                     <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editNews">
                       Edit
                     </button>
+                    <button type="button" class="btn btn-sm btn-danger text-black" data-bs-toggle="modal" data-bs-target="#editNews">
+                      Delete
+                    </button>
                   </td>
                 </tr>
                 <?php
