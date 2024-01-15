@@ -220,7 +220,6 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
               <th scope="col">Materials</th>
               <th scope="col">Status</th>
               <th scope="col">Location</th>
-              <th scope="col"><i class="fa-solid fa-info"></i></th>
             </tr>
           </thead>
           <tbody class="table-group-divider">
@@ -230,10 +229,13 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
             $result = $conn->query($sql);
 
             if ($result) {
+              $index = 1;
               while ($row = $result->fetch_assoc()) {
                 ?>
                 <tr>
-                  <th scope="row">1</th>
+                  <td>
+                    <?php echo $index; ?>
+                  </td>
                   <td>
                     <?php echo $row['serial_number']; ?>
                   </td>
@@ -249,18 +251,9 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
                   <td>
                     <?php echo $row['location']; ?>
                   </td>
-                  <td>
-                    <button type="button" class="btn btn-sm btn-danger text-black"
-                      onclick="deleteInventory(<?php echo $row['serial_number']; ?>)">
-                      Delete
-                    </button>
-                    <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal"
-                      data-bs-target="#editInventory">
-                      Edit
-                    </button>
-                  </td>
                 </tr>
                 <?php
+                $index++;
               }
             } else {
               echo "Error: " . $conn->error;
@@ -378,9 +371,9 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
           <thead>
             <tr>
               <th scope="col">No</th>
+              <th scope="col">ID Request</th>
               <th scope="col">Serial Number</th>
               <th scope="col">Name</th>
-              <th scope="col">Total</th>
               <th scope="col">Date of Collect</th>
               <th scope="col">Date of Return</th>
               <th scope="col">Status</th>
@@ -388,22 +381,66 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
             </tr>
           </thead>
           <tbody class="table-group-divider">
-            <tr>
-              <th scope="row">1</th>
-              <td>0001</td>
-              <td>AKM</td>
-              <td>70</td>
-              <td>20-02-2023</td>
-              <td>20-10-2023</td>
-              <td>Pending</td>
-              <td>
-                <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#return">
-                  Return
-                </button>
-              </td>
-            </tr>
+            <?php
+            require_once('./php/koneksi.php');
+            $sql = "SELECT r.id_request, r.serial_number, w.name, r.tgl_pinjam, r.tgl_kembali, r.opsi 
+                FROM request r
+                INNER JOIN weapons w ON r.serial_number = w.serial_number";
+            $result = $conn->query($sql);
+
+            if ($result === false) {
+              echo "Error: " . $conn->error;
+            } else {
+              if ($result->num_rows > 0) {
+                $index = 1;
+                while ($row = $result->fetch_assoc()) {
+                  ?>
+                  <tr>
+                    <td>
+                      <?php echo $index; ?>
+                    </td>
+                    <td>
+                      <?php echo $row['id_request']; ?>
+                    </td>
+                    <td>
+                      <?php echo $row['serial_number']; ?>
+                    </td>
+                    <td>
+                      <?php echo $row['name']; ?>
+                    </td>
+                    <td>
+                      <?php echo $row['tgl_pinjam']; ?>
+                    </td>
+                    <td>
+                      <?php echo $row['tgl_kembali']; ?>
+                    </td>
+                    <td>
+                      <?php echo ($row['opsi'] == 0) ? 'Diterima' : 'Ditolak'; ?>
+                    </td>
+                    <td>
+                      <?php
+                      // Tampilkan tombol hanya jika status adalah 1
+                      if ($row['opsi'] == 0) {
+                        ?>
+                        <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#return">
+                          Return
+                        </button>
+                        <?php
+                      }
+                      ?>
+                    </td>
+                  </tr>
+                  <?php
+                  $index++;
+                }
+              } else {
+                echo "<tr><td colspan='8'>Tidak ada data request yang ditemukan.</td></tr>";
+              }
+            }
+            ?>
           </tbody>
         </table>
+
       </div>
     </div>
 
@@ -458,7 +495,7 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
       $username = $_SESSION['username'];
 
       // Persiapkan pernyataan SQL
-      $sql = "SELECT name, grade, role FROM users WHERE username = ?";
+      $sql = "SELECT id_user, name, grade, role FROM users WHERE username = ?";
 
       // Persiapkan pernyataan SQL menggunakan prepared statement
       $stmt = $conn->prepare($sql);
@@ -468,6 +505,7 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
       $result = $stmt->get_result(); // Ambil data pengguna 
       if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
+        $id_user = $row['id_user'];
         $name = $row['name'];
         $grade = $row['grade'];
         $role = $row['role'];
@@ -490,6 +528,11 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
         </div>
         <form action="" method="post">
           <div class="profile-info" style="padding: 2% 10% 0 10%">
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="floatingInput" name="id" value="<?php echo $id_user; ?>"
+                readonly />
+              <label for="floatingInput">Id</label>
+            </div>
             <div class="form-floating mb-3">
               <input type="text" class="form-control" id="floatingInput" name="name" value="<?php echo $name; ?>"
                 readonly />
@@ -607,7 +650,33 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
             </h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body"><input type="file" /></div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col" style="margin: 1%">
+                <div class="form-floating mb-3">
+                  <input name="id_user" type="id" class="form-control border-3" id="floatingId" placeholder="Id" />
+                  <label for="floatingId">Id</label>
+                </div>
+                <div class="form-floating">
+                  <input name="serial_number" type="number" class="form-control border-3" id="floatingSerialNumber"
+                    placeholder="Serial Number" />
+                  <label for="floatingSerialNumber">Serial Number</label>
+                </div>
+              </div>
+              <div class="col" style="margin: 1%">
+                <div class="form-floating mb-3">
+                  <textarea name="reason" class="form-control border-3" placeholder="Leave a reason here"
+                    id="floatingTextarea" style="height: 100px"></textarea>
+                  <label for="floatingTextarea">Description</label>
+                </div>
+                <div class="form-floating">
+                  <input name="tgl_kembali" type="date" class="form-control border-3" id="floatingDateReturn"
+                    placeholder="Date of return" />
+                  <label for="floatingDateReturn">Date of return</label>
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
               Close

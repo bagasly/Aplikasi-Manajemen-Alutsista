@@ -142,10 +142,13 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
             $result = $conn->query($sql);
 
             if ($result) {
+              $index = 1;
               while ($row = $result->fetch_assoc()) {
                 ?>
                 <tr>
-                  <th scope="row">1</th>
+                  <td>
+                    <?php echo $index; ?>
+                  </td>
                   <td>
                     <?php echo $row['id_news']; ?>
                   </td>
@@ -177,6 +180,7 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
                   </td>
                 </tr>
                 <?php
+                $index++;
               }
             } else {
               echo "Error: " . $conn->error;
@@ -255,10 +259,13 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
             $result = $conn->query($sql);
 
             if ($result) {
+              $index = 1;
               while ($row = $result->fetch_assoc()) {
                 ?>
                 <tr>
-                  <th scope="row">1</th>
+                  <td>
+                    <?php echo $index; ?>
+                  </td>
                   <td>
                     <?php echo $row['serial_number']; ?>
                   </td>
@@ -290,6 +297,7 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
                   </td>
                 </tr>
                 <?php
+                $index++;
               }
             } else {
               echo "Error: " . $conn->error;
@@ -305,6 +313,113 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
       <nav class="navbar">
         <div class="container-fluid p-2">
           <a class="navbar-brand text-white" style="font-size: x-large; font-weight: 700">Apply</a>
+          <div class="d-flex me-3" onclick="showTabContent('nav-profile', 'nav-profile-tab')">
+            <a class="text-white" style="
+                  cursor: pointer;
+                  text-decoration: none;
+                  margin-right: 10px;
+                ">admin</a>
+            <a><i class="fa-solid fa-user text-white" style="cursor: pointer; font-size: large"></i></a>
+          </div>
+        </div>
+      </nav>
+      <div class="card border-0 bg-transparent" style="padding: 3%">
+        <div class="card-header text-white p-3" style="background-color: #134a6e">
+          <div id="dropdown" class="float-end">
+            <div class="btn-group">
+              <button type="button" class="btn text-white dropdown-toggle" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                All Status
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Read</a></li>
+                <li><a class="dropdown-item" href="#">Unready</a></li>
+                <li>
+                  <a class="dropdown-item" href="#">Banned</a>
+                </li>
+              </ul>
+            </div>
+            <div class="btn-group">
+              <button type="button" class="btn text-white dropdown-toggle" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                More Filter
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">A-Z</a></li>
+                <li><a class="dropdown-item" href="#">Stock</a></li>
+                <li>
+                  <a class="dropdown-item" href="#">Z-A</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="container-lg p-3 pt-4">
+          <?php
+          require_once('./php/koneksi.php');
+          // Query untuk mengambil semua data request dan nama user
+          $sql = "SELECT r.id_request, u.name, r.serial_number, r.reason
+              FROM request r
+              JOIN users u ON r.id_user = u.id_user";
+          $result = $conn->query($sql);
+
+          if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+              $id_request = $row['id_request'];
+              $nama = $row['name'];
+              $serial_number = $row['serial_number'];
+              $reason = $row['reason'];
+              ?>
+              <div class="card mb-4">
+                <div class="card-body">
+                  <h5 class="card-title">From
+                    <?php echo $nama; ?>
+                  </h5>
+                  <form action="./php/process_apply.php" method="post">
+                    <input type="hidden" name="id_request" value="<?php echo $id_request; ?>">
+                    <div class="form-floating mb-3">
+                      <input type="number" class="form-control border-3" id="floatingSerialNumber" name="serial_number"
+                        placeholder="Serial Number" value="<?php echo $serial_number; ?>" disabled />
+                      <label for="floatingSerialNumber">Serial Number</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <textarea name="reason" class="form-control border-3" placeholder="Leave a reason here"
+                        id="floatingTextareaDisabled" style="height: 100px" disabled><?php echo $reason; ?></textarea>
+                      <label for="floatingTextareaDisabled">Reason</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="admin_action" id="flexRadioDefault1"
+                        value="decline" />
+                      <label class="form-check-label" for="flexRadioDefault1">
+                        Decline
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="admin_action" id="flexRadioDefault2" value="accept"
+                        checked />
+                      <label class="form-check-label" for="flexRadioDefault2">
+                        Accept
+                      </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary float-end">Send</button>
+                  </form>
+                </div>
+              </div>
+              <?php
+            }
+          } else {
+            echo "Tidak ada data request yang ditemukan.";
+          }
+          ?>
+        </div>
+      </div>
+    </div>
+
+    <!-- Report -->
+    <div id="nav-report" class="tab-pane fade" role="tabpanel" aria-labelledby="nav-request-tab" tabindex="0">
+      <nav class="navbar">
+        <div class="container-fluid p-2">
+          <a class="navbar-brand text-white" style="font-size: x-large; font-weight: 700">Report</a>
           <div class="d-flex me-3" onclick="showTabContent('nav-profile', 'nav-profile-tab')">
             <a class="text-white" style="
                   cursor: pointer;
@@ -404,61 +519,7 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
           }
           ?>
         </div>
-      </div>
-    </div>
 
-    <!-- Report -->
-    <div id="nav-report" class="tab-pane fade" role="tabpanel" aria-labelledby="nav-request-tab" tabindex="0">
-      <nav class="navbar">
-        <div class="container-fluid p-2">
-          <a class="navbar-brand text-white" style="font-size: x-large; font-weight: 700">Report</a>
-          <div class="d-flex me-3" onclick="showTabContent('nav-profile', 'nav-profile-tab')">
-            <a class="text-white" style="
-                  cursor: pointer;
-                  text-decoration: none;
-                  margin-right: 10px;
-                ">admin</a>
-            <a><i class="fa-solid fa-user text-white" style="cursor: pointer; font-size: large"></i></a>
-          </div>
-        </div>
-      </nav>
-      <div class="card border-0 bg-transparent" style="padding: 3%">
-        <div class="card-header text-white p-3" style="background-color: #134a6e">
-          <div id="dropdown" class="float-end">
-            <div class="btn-group">
-              <button type="button" class="btn text-white dropdown-toggle" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                All Status
-              </button>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Read</a></li>
-                <li><a class="dropdown-item" href="#">Unready</a></li>
-                <li>
-                  <a class="dropdown-item" href="#">Banned</a>
-                </li>
-              </ul>
-            </div>
-            <div class="btn-group">
-              <button type="button" class="btn text-white dropdown-toggle" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                More Filter
-              </button>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">A-Z</a></li>
-                <li><a class="dropdown-item" href="#">Stock</a></li>
-                <li>
-                  <a class="dropdown-item" href="#">Z-A</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="container-lg bg-white">
-          <div class="list-group" style="padding: 2%">
-            <a href="#" class="list-group-item list-group-item-action list-group-item-secondary" data-bs-toggle="modal"
-              data-bs-target="#reportMessage" style="padding: 1%">From ......</a>
-          </div>
-        </div>
       </div>
     </div>
 
@@ -529,10 +590,13 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
             $result = $conn->query($sql);
 
             if ($result) {
+              $index = 1;
               while ($row = $result->fetch_assoc()) {
                 ?>
                 <tr>
-                  <th scope="row"></th>
+                  <td>
+                    <?php echo $index; ?>
+                  </td>
                   <td>
                     <?php echo $row['id_user']; ?>
                   </td>
@@ -560,6 +624,7 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
                   </td>
                 </tr>
                 <?php
+                $index++;
               }
             } else {
               echo "Error: " . $conn->error;
