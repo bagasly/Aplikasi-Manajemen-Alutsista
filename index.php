@@ -58,12 +58,6 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
             </button>
           </li>
           <li class="list-group-item">
-            <button class="nav-link" id="nav-alert-tab" data-bs-toggle="tab" data-bs-target="#nav-alert" type="button"
-              role="tab" aria-controls="nav-alert" aria-selected="false">
-              <i class="fa-solid fa-bell"></i>Alert
-            </button>
-          </li>
-          <li class="list-group-item">
             <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile"
               type="button" role="tab" aria-controls="nav-profile" aria-selected="false">
               <i class="fa-solid fa-user"></i>Profile
@@ -444,33 +438,6 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
       </div>
     </div>
 
-    <!-- Alert -->
-    <div id="nav-alert" class="tab-pane fade" role="tabpanel" aria-labelledby="nav-alert-tab" tabindex="0">
-      <nav class="navbar">
-        <div class="container-fluid p-2">
-          <a class="navbar-brand text-white" style="font-size: x-large; font-weight: 700">Alert</a>
-          <div>
-            <a class="me-1"><i class="fa-solid fa-user text-white" style="cursor: pointer; font-size: large"
-                onclick="showTabContent('nav-profile', 'nav-profile-tab')"></i></a>
-            <a class="text-white me-3" style="cursor: pointer; text-decoration: none"
-              onclick="showTabContent('nav-profile', 'nav-profile-tab')">user</a>
-            <a href="./php/logout.php"><button type="button" class="btn btn-sm btn-danger me-2">
-                Logout
-              </button></a>
-          </div>
-        </div>
-      </nav>
-      <div class="card border-0 bg-transparent" style="padding: 3%">
-        <div class="card-header text-white p-5" style="background-color: #134a6e"></div>
-        <div class="container-lg bg-white">
-          <div class="list-group" style="padding: 2%">
-            <a href="#" class="list-group-item list-group-item-action list-group-item-secondary" data-bs-toggle="modal"
-              data-bs-target="#alert" style="padding: 1%">From ......</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- Profile -->
     <div id="nav-profile" class="tab-pane fade" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
       <nav class="navbar">
@@ -612,33 +579,6 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
     </div>
 
     <!-- Modal -->
-    <!-- Alert -->
-    <div class="modal fade" id="alert" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-      aria-labelledby="alert" aria-hidden="true">
-      <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-          <div class="modal-header" style="background-color: var(--btn); color: white">
-            <h1 class="modal-title fs-5" id="staticBackdropLabel">Message</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <p>From ...</p>
-            <p>message</p>
-            <div class="form-floating" style="margin-bottom: 5px">
-              <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-              <label for="floatingTextarea">Comments</label>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-              Close
-            </button>
-            <button type="button" class="btn btn-primary">Send</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- Return -->
     <div class="modal fade" id="return" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
       aria-labelledby="return" aria-hidden="true">
