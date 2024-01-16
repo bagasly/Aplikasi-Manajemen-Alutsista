@@ -214,6 +214,7 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
               <th scope="col">Materials</th>
               <th scope="col">Status</th>
               <th scope="col">Location</th>
+              <th scope="col"><i class="fa-solid fa-info"></i></th>
             </tr>
           </thead>
           <tbody class="table-group-divider">
@@ -245,6 +246,11 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
                   <td>
                     <?php echo $row['location']; ?>
                   </td>
+                  <td><button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#details"onclick="editInventory(<?php echo $row['serial_number']; ?>, 
+                      '<?php echo $row['name']; ?>',
+                      '<?php echo $row['materials']; ?>',
+                      '<?php echo $row['status']; ?>',
+                      '<?php echo $row['location']; ?>')">Details</button></td>
                 </tr>
                 <?php
                 $index++;
@@ -644,54 +650,78 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
                   <img class="w-75 bg-body-secondary" src="assets/peluru.png" alt="" />
                 </div>
                 <div class="col">
-                  <ul class="list-group">
-                    <li class="list-group-item list-group-item-secondary">
-                      Serial Number
-                    </li>
-                    <li class="list-group-item list-group-item-secondary">
-                      Name
-                    </li>
-                    <li class="list-group-item list-group-item-secondary">
-                      Type
-                    </li>
-                    <li class="list-group-item list-group-item-secondary">
-                      Total
-                    </li>
-                    <li class="list-group-item list-group-item-secondary">
-                      Size
-                    </li>
-                    <li class="list-group-item list-group-item-secondary">
-                      Weight
-                    </li>
-                    <li class="list-group-item list-group-item-secondary">
-                      Fire Power
-                    </li>
-                  </ul>
+                  <div class="form-floating mb-3">
+                    <input name="serial_number" type="id" class="form-control border-3"
+                      id="floatingSerialNumberinventory" placeholder="Serial Number" value="" disabled />
+                    <label for="floatingSerialNumberinventory">Serial Number</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input name="name" type="text" class="form-control border-3" id="floatingNameinventory"
+                      placeholder="Name" value="" disabled/>
+                    <label for="floatingNameinventory">Name</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input name="type" type="text" class="form-control border-3" id="floatingType" placeholder="Type"
+                      value="" disabled/>
+                    <label for="floatingType">Type</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input name="capacity" type="text" class="form-control border-3" id="floatingCapacity"
+                      placeholder="Capacity" value="" disabled/>
+                    <label for="floatingCapacity">Capacity</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input name="size" type="text" class="form-control border-3" id="floatingSize" placeholder="Size"
+                      value="" disabled/>
+                    <label for="floatingSize">Size</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input name="weight" type="text" class="form-control border-3" id="floatingWeight"
+                      placeholder="Weight" value="" disabled />
+                    <label for="floatingWeight">Weight</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input name="fire_power" type="text" class="form-control border-3" id="floatingFirepower"
+                      placeholder="Fire Power" value="" disabled/>
+                    <label for="floatingFirePower">Fire Power</label>
+                  </div>
                 </div>
                 <div class="col">
-                  <ul class="list-group">
-                    <li class="list-group-item list-group-item-secondary">
-                      Speed
-                    </li>
-                    <li class="list-group-item list-group-item-secondary">
-                      Materials
-                    </li>
-                    <li class="list-group-item list-group-item-secondary">
-                      Status
-                    </li>
-                    <li class="list-group-item list-group-item-secondary">
-                      Owner
-                    </li>
-                    <li class="list-group-item list-group-item-secondary">
-                      Location
-                    </li>
-                    <li class="list-group-item list-group-item-secondary">
-                      Maintance
-                    </li>
-                    <li class="list-group-item list-group-item-secondary">
-                      History
-                    </li>
-                  </ul>
+                  <div class="form-floating mb-3">
+                    <input name="speed" type="text" class="form-control border-3" id="floatingSpeed" placeholder="Speed"
+                      value="" disabled/>
+                    <label for="floatingSpeed">Speed</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input name="materials" type="text" class="form-control border-3" id="floatingMaterialsinventory"
+                      placeholder="Materials" value="" disabled/>
+                    <label for="floatingMaterialsinventory">Materials</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input name="status" type="text" class="form-control border-3" id="floatingStatusinventory"
+                      placeholder="Status" value="" disabled/>
+                    <label for="floatingStatusinventory">Status</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input name="owner" type="text" class="form-control border-3" id="floatingOwner" placeholder="Owner"
+                      value="" disabled/>
+                    <label for="floatingOwner">Owner</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input name="location" type="text" class="form-control border-3" id="floatingLocationinventory"
+                      placeholder="Location" value="" disabled/>
+                    <label for="floatingLocationinventory">Location</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input name="maintance" type="text" class="form-control border-3" id="floatingMaintance"
+                      placeholder="Maintance" value="" disabled/>
+                    <label for="floatingMaintance">Maintance</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input name="history" type="text" class="form-control border-3" id="floatingHistory"
+                      placeholder="History" value="" disabled/>
+                    <label for="floatingHistory">History</label>
+                  </div>
                 </div>
               </div>
             </div>
@@ -707,6 +737,15 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/global.js"></script>
+  <script>
+    function editInventory(serial_number, name, status, location, materials) {
+      document.getElementById('floatingSerialNumberinventory').value = serial_number;
+      document.getElementById('floatingNameinventory').value = name;
+      document.getElementById('floatingMaterialsinventory').value = materials;
+      document.getElementById('floatingStatusinventory').value = status;
+      document.getElementById('floatingLocationinventory').value = location;
+    }
+  </script>
 </body>
 
 </html>
