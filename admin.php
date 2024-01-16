@@ -276,7 +276,7 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
                     <?php echo $row['materials']; ?>
                   </td>
                   <td>
-                    <?php echo $row['status']; ?>
+                    <?php echo ($row['status'] == 0) ? 'Ready' : 'Unready'; ?>
                   </td>
                   <td>
                     <?php echo $row['location']; ?>

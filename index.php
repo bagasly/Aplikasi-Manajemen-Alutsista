@@ -241,12 +241,12 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
                     <?php echo $row['materials']; ?>
                   </td>
                   <td>
-                    <?php echo $row['status']; ?>
+                    <?php echo ($row['status'] == 0) ? 'Ready' : 'Unready'; ?>
                   </td>
                   <td>
                     <?php echo $row['location']; ?>
                   </td>
-                  <td><button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#details"onclick="editInventory(<?php echo $row['serial_number']; ?>, 
+                  <td><button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#details" onclick="editInventory(<?php echo $row['serial_number']; ?>, 
                       '<?php echo $row['name']; ?>',
                       '<?php echo $row['materials']; ?>',
                       '<?php echo $row['status']; ?>',
@@ -657,22 +657,22 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
                   </div>
                   <div class="form-floating mb-3">
                     <input name="name" type="text" class="form-control border-3" id="floatingNameinventory"
-                      placeholder="Name" value="" disabled/>
+                      placeholder="Name" value="" disabled />
                     <label for="floatingNameinventory">Name</label>
                   </div>
                   <div class="form-floating mb-3">
                     <input name="type" type="text" class="form-control border-3" id="floatingType" placeholder="Type"
-                      value="" disabled/>
+                      value="" disabled />
                     <label for="floatingType">Type</label>
                   </div>
                   <div class="form-floating mb-3">
                     <input name="capacity" type="text" class="form-control border-3" id="floatingCapacity"
-                      placeholder="Capacity" value="" disabled/>
+                      placeholder="Capacity" value="" disabled />
                     <label for="floatingCapacity">Capacity</label>
                   </div>
                   <div class="form-floating mb-3">
                     <input name="size" type="text" class="form-control border-3" id="floatingSize" placeholder="Size"
-                      value="" disabled/>
+                      value="" disabled />
                     <label for="floatingSize">Size</label>
                   </div>
                   <div class="form-floating mb-3">
@@ -682,44 +682,44 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
                   </div>
                   <div class="form-floating mb-3">
                     <input name="fire_power" type="text" class="form-control border-3" id="floatingFirepower"
-                      placeholder="Fire Power" value="" disabled/>
+                      placeholder="Fire Power" value="" disabled />
                     <label for="floatingFirePower">Fire Power</label>
                   </div>
                 </div>
                 <div class="col">
                   <div class="form-floating mb-3">
                     <input name="speed" type="text" class="form-control border-3" id="floatingSpeed" placeholder="Speed"
-                      value="" disabled/>
+                      value="" disabled />
                     <label for="floatingSpeed">Speed</label>
                   </div>
                   <div class="form-floating mb-3">
                     <input name="materials" type="text" class="form-control border-3" id="floatingMaterialsinventory"
-                      placeholder="Materials" value="" disabled/>
+                      placeholder="Materials" value="" disabled />
                     <label for="floatingMaterialsinventory">Materials</label>
                   </div>
                   <div class="form-floating mb-3">
                     <input name="status" type="text" class="form-control border-3" id="floatingStatusinventory"
-                      placeholder="Status" value="" disabled/>
+                      placeholder="Status" value="" disabled />
                     <label for="floatingStatusinventory">Status</label>
                   </div>
                   <div class="form-floating mb-3">
                     <input name="owner" type="text" class="form-control border-3" id="floatingOwner" placeholder="Owner"
-                      value="" disabled/>
+                      value="" disabled />
                     <label for="floatingOwner">Owner</label>
                   </div>
                   <div class="form-floating mb-3">
                     <input name="location" type="text" class="form-control border-3" id="floatingLocationinventory"
-                      placeholder="Location" value="" disabled/>
+                      placeholder="Location" value="" disabled />
                     <label for="floatingLocationinventory">Location</label>
                   </div>
                   <div class="form-floating mb-3">
                     <input name="maintance" type="text" class="form-control border-3" id="floatingMaintance"
-                      placeholder="Maintance" value="" disabled/>
+                      placeholder="Maintance" value="" disabled />
                     <label for="floatingMaintance">Maintance</label>
                   </div>
                   <div class="form-floating mb-3">
                     <input name="history" type="text" class="form-control border-3" id="floatingHistory"
-                      placeholder="History" value="" disabled/>
+                      placeholder="History" value="" disabled />
                     <label for="floatingHistory">History</label>
                   </div>
                 </div>
